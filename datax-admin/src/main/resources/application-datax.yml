@@ -1,0 +1,10 @@
+sys:
+  type: windows
+
+datax:
+  home:
+    path: M:\wxm-datax\datax-home
+
+  job:
+    file:
+      directory: M:\wxm-datax\datax-jobs

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.wxm</groupId>
+        <artifactId>wxm-datax</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <groupId>com.wxm</groupId>
+    <artifactId>wxm-api</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>wxm-api</name>
+    <description>api</description>
+    <properties>
+        <project-sourceEncoding>UTF-8</project-sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <java.version>1.8</java.version>
+        <fastjson.version>1.2.83</fastjson.version>
+    </properties>
+    <packaging>jar</packaging><!--父工程使用pom打包-->
+    <dependencies>
+
+        <!--包含了wxm-base-->
+        <dependency>
+            <groupId>com.wxm</groupId>
+            <artifactId>quartz-single</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.wxm</groupId>
+            <artifactId>wxm-service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.wxm</groupId>
+            <artifactId>wxm-security</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+<!--
+ 外部接口 使用 springsecurit+oauth2 的客户端模式
+ 内部接口，包含权限系统，采用 springsecurity
+ <dependency>
+            <groupId>com.wxm</groupId>
+            <artifactId>security-oauth2</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>-->
+        <!-- 多数据源，对mybatis plus 没有处理好-->
+        <!--        <dependency>
+                    <groupId>com.wxm</groupId>
+                    <artifactId>wxm-dao</artifactId>
+                    <version>0.0.1-SNAPSHOT</version>
+                </dependency>-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-quartz -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

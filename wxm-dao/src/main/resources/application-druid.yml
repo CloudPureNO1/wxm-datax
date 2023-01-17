@@ -1,0 +1,74 @@
+spring:
+  datasource:
+    #数据源1(默认为主数据源，自定义名称为primary)
+    ds1:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/wxm?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useAffectedRows=true&zeroDateTimeBehavior=convertToNull
+      username: wxm
+      password: wxm
+      type: com.alibaba.druid.pool.DruidDataSource
+    #quartz 业务 的数据源 （不是定时任务的）
+    ds2:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/qjob?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useAffectedRows=true&zeroDateTimeBehavior=convertToNull
+      username: qjob
+      password: qjob
+      type: com.alibaba.druid.pool.DruidDataSource
+    #连接池配置
+    druid:
+      initial-size: 5
+      max-active: 100
+      min-idle: 5
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      validation-query: SELECT 1 FROM DUAL
+      validation-query-timeout: 60000
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 100000
+
+      #监控配置
+      # WebStatFilter配置，说明请参考Druid Wiki，配置_配置WebStatFilter
+      web-stat-filter.enabled: true
+      web-stat-filter.url-pattern: /*
+      #web-stat-filter.exclusions: *.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*
+      web-stat-filter.exclusions: /druid/*
+      # StatViewServlet配置，说明请参考Druid Wiki，配置_StatViewServlet配置
+      stat-view-servlet.enabled: true
+      stat-view-servlet.url-pattern: /druid/*
+      stat-view-servlet.reset-enable: false
+      stat-view-servlet.login-username: admin
+      stat-view-servlet.login-password: adminWxm
+      stat-view-servlet.allow: 127.0.0.1
+      #访问黑名单
+      stat-view-servlet.deny:
+      # 配置StatFilter
+      filter.stat.db-type: mysql
+      filter.stat.log-slow-sql: true
+      filter.stat.slow-sql-millis: 5000
+      filter.stat.merge-sql: true
+      filter.stat.enabled: true
+      # 配置WallFilter
+      filter.wall.enabled: true
+      filter.wall.db-type: mysql
+      filter.wall.config.delete-allow: false
+      filter.wall.config.drop-table-allow: false
+      filter.wall.config.alter-table-allow: false
+      filter.wall.config.truncate-allow: false
+      filter.wall.config.none-base-statement-allow: false
+      filter.wall.config.update-where-none-check: true
+      filter.wall.config.select-into-outfile-allow: false
+      filter.wall.config.metadata-allow: true
+      filter.wall.log-violation: true
+      filter.wall.throw-exception: true
+      # 不使用以上配置的话可以再代码中配置，datasource的配置还是要保留，监控的配置可以去掉，在代码中配置
+
+# PageHelper 分页
+  pagehelper:
+    helper-dialect: mysql
+    reasonable: true
+    support-methods-arguments: true
+    pageSizeZero: true

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxm.druid.mapper.master.WxmRolePermissionMapper">
+
+    <delete id="deleteBatchByRoleIdAndPermissionIds">
+        delete from wxm_role_permission
+        where role_id=#{roleId,jdbcType=BIGINT}
+        and permission_id in
+        <foreach item="permissionId" collection="list" open="(" close=")" separator=",">
+            #{permissionId,jdbcType=BIGINT}
+        </foreach>
+    </delete>
+
+    <delete id="deleteByRoleIds">
+        delete from wxm_role_permission
+        where role_id in
+        <foreach collection="list" item="roleId" open="(" close=")" separator=",">
+            #{roleId,jdbcType=BIGINT}
+        </foreach>
+    </delete>
+
+    <delete id="deleteByPermissionIds">
+        delete from wxm_role_permission
+        where permission_id in
+        <foreach collection="list" item="permissionId" open="(" close=")" separator=",">
+            #{permissionId,jdbcType=BIGINT}
+        </foreach>
+    </delete>
+</mapper>

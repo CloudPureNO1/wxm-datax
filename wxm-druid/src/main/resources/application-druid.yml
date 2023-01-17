@@ -1,0 +1,128 @@
+# 默认数据源   https://baomidou.com/pages/a61e1b/#%E6%96%87%E6%A1%A3-documentation  mybatis-plus druid 对数据有配置
+spring:
+  datasource:
+    dynamic:
+      # 设置默认主数据源为master 自定义的别名，余下面的自定义数据源名称一直
+      primary: master
+      # 设置严格模式,默认false不启动. 启动后在未匹配到指定数据源时候回抛出异常,不启动会使用默认数据源
+      strict: true
+      #JDBC 配置
+      datasource:
+        # 主数据源（自定义名称，可以任意）
+        master:
+          url: jdbc:mysql://127.0.0.1:3306/wxm?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useAffectedRows=true&zeroDateTimeBehavior=convertToNull
+          username: wxm
+          password: wxm
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          type: com.alibaba.druid.pool.DruidDataSource
+          # 连接池配置
+          druid:
+            initial-size: 5
+            max-active: 100
+            min-idle: 5
+            max-wait: 60000
+            pool-prepared-statements: true
+            max-pool-prepared-statement-per-connection-size: 20
+            validation-query: SELECT 1 FROM DUAL
+            validation-query-timeout: 60000
+            test-on-borrow: false
+            test-on-return: false
+            test-while-idle: true
+            time-between-eviction-runs-millis: 60000
+            min-evictable-idle-time-millis: 100000
+
+        # 第二个数据源名称（自定义，可以任意）   quartz 的表结
+        quartz:
+          url: jdbc:mysql://127.0.0.1:3306/qjob?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useAffectedRows=true&zeroDateTimeBehavior=convertToNull
+          username: qjob
+          password: qjob
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          type: com.alibaba.druid.pool.DruidDataSource
+          # 连接池配置
+          druid:
+            initial-size: 5
+            max-active: 100
+            min-idle: 5
+            max-wait: 60000
+            pool-prepared-statements: true
+            max-pool-prepared-statement-per-connection-size: 20
+            validation-query: SELECT 1 FROM DUAL
+            validation-query-timeout: 60000
+            test-on-borrow: false
+            test-on-return: false
+            test-while-idle: true
+            time-between-eviction-runs-millis: 60000
+            min-evictable-idle-time-millis: 100000
+
+
+
+
+
+    #监控配置
+    # WebStatFilter配置，说明请参考Druid Wiki，配置_配置WebStatFilter
+    druid:
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        # spring.datasource.druid.web-stat-filter.exclusions: *.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*
+        exclusions: /druid/*
+      # StatViewServlet配置，说明请参考Druid Wiki，配置_StatViewServlet配置
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        reset-enable: false
+        login-username: admin
+        login-password: admin
+        allow: 127.0.0.1
+        #访问黑名单
+        deny: 192.168.179.1
+
+      # 配置StatFilter
+      filter:
+        stat:
+          db-type: mysql
+          log-slow-sql: true
+          slow-sql-millis: 5000
+          merge-sql: true
+          enabled: true
+
+        # 配置WallFilter
+        wall:
+          enabled: true
+          db-type: mysql
+          log-violation: true
+          throw-exception: true
+          config:
+            delete-allow: true
+            drop-table-allow: false
+            alter-table-allow: false
+            truncate-allow: false
+            none-base-statement-allow: false
+            update-where-none-check: true
+            select-into-outfile-allow: false
+            metadata-allow: true
+  # 不使用以上配置的话可以再代码中配置，datasource的配置还是要保留，监控的配置可以去掉，在代码中配置
+
+
+  #指定 mapper 文件路径
+mybatis:
+  mapper-locations: classpath:mapper/xml/**/*.xml
+  configuration:
+    cache-enabled: false
+    #开启驼峰命名
+    map-underscore-to-camel-case: true
+    #打印 SQL 语句
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+#mybatis-plus 配置
+mybatis-plus:
+  auto-refresh: false
+  mapper-locations: classpath:mapper/xml/**/*.xml
+  # type-aliases-package: xxxx.xx
+  configuration:
+    cache-enabled: false
+    call-setters-on-nulls: true
+    map-underscore-to-camel-case: true  #开启驼峰命名
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # #打印 SQL 语句
+

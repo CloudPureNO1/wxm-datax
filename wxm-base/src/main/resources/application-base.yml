@@ -1,0 +1,4 @@
+wxm:
+  logs:
+    name: wxm-datax
+    path: D:\\${wxm.logs.name}\\logs

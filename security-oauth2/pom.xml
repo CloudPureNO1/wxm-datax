@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.wxm</groupId>
+        <artifactId>wxm-datax</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <groupId>com.wxm</groupId>
+    <artifactId>security-oauth2</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>security-oauth2</name>
+    <description>Demo project for Spring Boot</description>
+    <packaging>jar</packaging><!--父工程使用pom打包-->
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.wxm</groupId>
+            <artifactId>wxm-util</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.wxm</groupId>
+            <artifactId>wxm-druid</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.wxm</groupId>
+            <artifactId>wxm-service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!--
+        1.
+        Since Spring Boot provides a Maven BOM to manage dependency versions,   you do not need to specify a version.
+        If you wish to override the Spring Security version, you may do so by providing a Maven property, as the following example shows:
+        <properties>
+            <spring-security.version>5.7.2</spring-security.version>
+        </properties>
+
+        2.
+        Since Spring Security makes breaking changes only in major releases, it is safe to use a newer version of Spring Security with Spring Boot.
+         However, at times, you may need to update the version of Spring Framework as well.
+         You can do so by adding a Maven property, as the following example shows:
+         <properties>
+            <spring.version>5.3.21</spring.version>
+        </properties>
+         -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+            <version>2.3.6.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
+    <repositories>
+        <!--
+            All GA releases (that is, versions ending in .RELEASE) are deployed to Maven Central, so no additional Maven repositories need to be declared in your pom.
+            所有GA版本（即以.RELEASE结尾的版本）都部署到Maven Central，因此无需在pom中声明其他Maven存储库。
+            If you use a SNAPSHOT version, you need to ensure that you have the Spring Snapshot repository defined, as the following example shows:
+            如果使用快照版本，则需要确保已定义Spring快照存储库，如下例所示：
+        -->
+        <repository>
+            <id>spring-snapshot</id>
+            <name>Spring Snapshot Repository</name>
+            <url>https://repo.spring.io/snapshot</url>
+        </repository>
+        <!--
+            If you use a milestone or release candidate version, you need to ensure that you have the Spring Milestone repository defined, as the following example shows:
+            如果使用里程碑或发布候选版本，则需要确保已定义Spring里程碑存储库，如下例所示：
+        -->
+        <repository>
+            <id>spring-milestone</id>
+            <name>Spring Milestone Repository</name>
+            <url>https://repo.spring.io/milestone</url>
+        </repository>
+    </repositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

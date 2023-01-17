@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxm.druid.mapper.master.WxmResourceMapper">
+
+    <select id="selectAll" resultType="com.wxm.druid.entity.master.WxmResource">
+        select *
+        from wxm_resource
+        order by resource_num, order_num, parent_id
+    </select>
+
+    <select id="selectByUsername" resultType="com.wxm.druid.entity.master.WxmResource">
+        select *
+        from wxm_resource rs
+        where rs.resource_status = '1'
+          and exists(
+                select 1
+                from wxm_role_resource rrs,
+                     wxm_role r
+                where rs.resource_id = rrs.resource_id
+                  and rrs.role_id = r.role_id
+                  and r.role_status = '1'
+                  and exists(
+                        select 1
+                        from wxm_group_role gr,
+                             wxm_group g
+                        where r.role_id = gr.role_id
+                          and gr.group_id = g.group_id
+                          and g.group_status = '1'
+                          and exists(
+                                select 1
+                                from wxm_user_group ug,
+                                     wxm_user u
+                                where g.group_id = ug.group_id
+                                  and ug.user_id = u.user_id
+                                  and u.user_status = '1'
+                                  and u.username = #{username,jdbcType=VARCHAR}
+                            )
+                    )
+            )
+        order by resource_num, order_num, parent_id
+    </select>
+
+    <select id="selectByRoleId"  resultType="com.wxm.druid.entity.master.WxmResource">
+        select *
+        from wxm_resource rs
+        where exists(
+                      select 1
+                      from wxm_role r,
+                           wxm_role_resource rrs
+                      where rs.resource_id = rrs.resource_id
+                        and r.role_id = rrs.role_id
+                        and r.role_id =#{roleId,jdbcType=BIGINT}
+                  )
+    </select>
+
+
+    <select id="selectByCon" resultType="com.wxm.druid.entity.master.WxmResource">
+        select *
+        from wxm_resource
+        where resource_id is not null
+        <if test="resourceId!=null">
+          and   resource_id=#{resourceId,jdbcType=BIGINT}
+        </if>
+        <if test="resourceName!=null and resourceName!=''.toString()">
+          and   resource_name like concat('%',#{resourceName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="resourceUrl!=null and resourceUrl!=''.toString()">
+          and    resource_url concat('%',#{resourceUrl,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="resourceType!=null and resourceType!=''.toString()">
+           and  resource_type=#{resourceType,jdbcType=VARCHAR}
+        </if>
+        order by resource_num, order_num, parent_id
+    </select>
+</mapper>

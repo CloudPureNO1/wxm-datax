@@ -1,0 +1,4 @@
+security:
+  cross:
+    # 允许跨域的请求源地址
+    origins: http://localhost:8080,http://127.0.0.1:8080

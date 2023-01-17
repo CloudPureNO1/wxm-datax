@@ -1,0 +1,34 @@
+2022-09-02 11:31:20.735 [main] INFO  com.wxm.dao.WxmDaoApplicationTests - Starting WxmDaoApplicationTests using Java 1.8.0_271 on DESKTOP-352NEFC with PID 10752 (started by CloudPure in M:\wxm-datax\wxm-dao)
+2022-09-02 11:31:20.737 [main] INFO  com.wxm.dao.WxmDaoApplicationTests - The following 2 profiles are active: "druid", "mybatis-plus"
+2022-09-02 11:31:22.373 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2022-09-02 11:31:22.377 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-09-02 11:31:22.422 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 24 ms. Found 0 Redis repository interfaces.
+2022-09-02 11:31:26.945 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2022-09-02 11:31:26.972 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2022-09-02 11:31:26.972 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2022-09-02 11:31:26.974 [main] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2022-09-02 11:31:26.976 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2022-09-02 11:31:26.976 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2022-09-02 11:31:26.977 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2022-09-02 11:31:26.978 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@6bce4140
+2022-09-02 11:31:27.137 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2022-09-02 11:31:27.137 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2022-09-02 11:31:27.157 [main] INFO  com.wxm.dao.WxmDaoApplicationTests - Started WxmDaoApplicationTests in 7.057 seconds (JVM running for 8.208)
+2022-09-02 11:31:28.133 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2022-09-02 11:31:29.168 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} inited
+2022-09-02 11:31:29.295 [main] INFO  com.wxm.dao.WxmDaoApplicationTests - jobDetals is [{"cronExpression":"0 0 */1 * * ?","jobClassName":"com.wxm.quartz.single.job.CustomJob","jobGroup":"GCustomJob-6deb2748-a023-4019-bf66-14d8db56361d-268234230464444872148222196","jobName":"JCustomJob-6deb2748-a023-4019-bf66-14d8db56361d-268234230464444872148222196","schedName":"MySchedulerListener","timeZoneId":"Asia/Shanghai","triggerGroup":"TGCustomJob-6deb2748-a023-4019-bf66-14d8db56361d-268234230464444872148222196","triggerName":"TCustomJob-6deb2748-a023-4019-bf66-14d8db56361d-268234230464444872148222196"},{"cronExpression":"*/10 * * * * ?","jobClassName":"com.wxm.quartz.single.job.DataXCronJob","jobGroup":"Gmysqlreader2mysqlwriter-1bb90013-630a-4831-bb56-e4ccb60f4c88-388198192b","jobName":"Jmysqlreader2mysqlwriter-1bb90013-630a-4831-bb56-e4ccb60f4c88-388198192b","schedName":"MySchedulerListener","timeZoneId":"Asia/Shanghai","triggerGroup":"TGmysqlreader2mysqlwriter-1bb90013-630a-4831-bb56-e4ccb60f4c88-388198192b","triggerName":"Tmysqlreader2mysqlwriter-1bb90013-630a-4831-bb56-e4ccb60f4c88-388198192b"},{"cronExpression":"0 0 */1 * * ?","jobClassName":"com.wxm.quartz.single.job.OrdinaryJob","jobGroup":"GOrdinaryJob-TestJob-8967d837-5f8f-46c5-943e-e14a5569db6d-336202230232148444196","jobName":"JOrdinaryJob-TestJob-8967d837-5f8f-46c5-943e-e14a5569db6d-336202230232148444196","schedName":"MySchedulerListener","timeZoneId":"Asia/Shanghai","triggerGroup":"TGOrdinaryJob-TestJob-8967d837-5f8f-46c5-943e-e14a5569db6d-336202230232148444196","triggerName":"TOrdinaryJob-TestJob-8967d837-5f8f-46c5-943e-e14a5569db6d-336202230232148444196"},{"cronExpression":"*/10 * * * * ?","jobClassName":"com.wxm.quartz.single.job.OrdinaryJob","jobGroup":"GOrdinaryJob-TestJob-d455a65d-79d5-4493-a64d-e77573155ed8-336202230232148444196","jobName":"JOrdinaryJob-TestJob-d455a65d-79d5-4493-a64d-e77573155ed8-336202230232148444196","schedName":"MySchedulerListener","timeZoneId":"Asia/Shanghai","triggerGroup":"TGOrdinaryJob-TestJob-d455a65d-79d5-4493-a64d-e77573155ed8-336202230232148444196","triggerName":"TOrdinaryJob-TestJob-d455a65d-79d5-4493-a64d-e77573155ed8-336202230232148444196"}]
+2022-09-02 11:31:29.297 [main] INFO  com.wxm.dao.WxmDaoApplicationTests - dictionary is [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]
+2022-09-02 11:31:29.582 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2022-09-02 11:31:29.584 [SpringApplicationShutdownHook] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+2022-09-02 11:31:29.585 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2022-09-02 11:31:29.586 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2022-09-02 11:31:29.588 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2022-09-02 11:31:29.631 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closed
+2022-09-02 11:31:29.633 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed

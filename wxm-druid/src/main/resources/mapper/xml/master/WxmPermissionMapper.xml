@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxm.druid.mapper.master.WxmPermissionMapper">
+    <select id="selectAll" resultType="com.wxm.druid.entity.master.WxmPermission">
+        select *
+        from wxm_permission
+    </select>
+    <select id="selectByCon" resultType="com.wxm.druid.entity.master.WxmPermission">
+        select *
+        from wxm_permission p where 1=1
+        <if test="permissionId!=null">
+            and p.permission_id=#{permissionId,jdbcType=BIGINT}
+        </if>
+        <if test="permissionName!=null and permissionName.length()>0">
+            and p.permission_name like concat(#{permissionName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="permissionCode!=null and permissionCode.length()>0">
+            and p.permission_code=#{permissionCode,jdbcType=VARCHAR}
+        </if>
+
+        <if test="creator!=null and creator.length()>0">
+            and p.creator=#{creator,jdbcType=VARCHAR}
+        </if>
+        <if test="permissionType!=null and permissionType.length()>0">
+            and p.permission_type=#{permissionType,jdbcType=VARCHAR}
+        </if>
+        <if test="permissionStatus!=null and permissionStatus.length()>0">
+            and p.permission_status=#{permissionStatus,jdbcType=VARCHAR}
+        </if>
+        <if test="roleId!=null">
+            and exists(
+                select 1 from wxm_role_permission rp  where rp.permission_id=p.permission_id
+                and rp.role_id=#{roleId,jdbcType=BIGINT}
+            )
+        </if>
+        order by update_time desc
+    </select>
+    <select id="selectByConNonRole" resultType="com.wxm.druid.entity.master.WxmPermission">
+        select *
+        from wxm_permission p where 1=1
+        <if test="permissionId!=null">
+            and p.permission_id=#{permissionId,jdbcType=BIGINT}
+        </if>
+        <if test="permissionName!=null and permissionName.length()>0">
+            and p.permission_name like concat(#{permissionName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="permissionCode!=null and permissionCode.length()>0">
+            and p.permission_code=#{permissionCode,jdbcType=VARCHAR}
+        </if>
+
+        <if test="creator!=null and creator.length()>0">
+            and p.creator=#{creator,jdbcType=VARCHAR}
+        </if>
+        <if test="permissionType!=null and permissionType.length()>0">
+            and p.permission_type=#{permissionType,jdbcType=VARCHAR}
+        </if>
+        <if test="permissionStatus!=null and permissionStatus.length()>0">
+            and p.permission_status=#{permissionStatus,jdbcType=VARCHAR}
+        </if>
+        <if test="roleId!=null">
+            and not exists(
+            select 1 from wxm_role_permission rp  where rp.permission_id=p.permission_id
+            and rp.role_id=#{roleId,jdbcType=BIGINT}
+            )
+        </if>
+    </select>
+
+
+    <!--查询所有权限信息，包含是否授权给角色，角色为空时，是否授权全部为否0     rbac51005-->
+    <select id="selectByConAboutRole" resultType="com.wxm.druid.entity.master.WxmPermission">
+        select p.permission_id,p.permission_name,p.permission_code,p.permission_type,p.permission_status,p.creator,p.create_time,p.operator,p.update_time,p.permission_desc,
+        ifnull((select '1' from wxm_role_permission rp where rp.permission_id=p.permission_id and rp.role_id=#{roleId,jdbcType=BIGINT}),'0') as checked
+        from wxm_permission p
+        where p.permission_status='1'
+        <if test="permissionId!=null">
+            and p.permission_id=#{permissionId,jdbcType=BIGINT}
+        </if>
+        <if test="permissionName!=null and permissionName.length()>0">
+            and p.permission_name like concat(#{permissionName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="permissionCode!=null and permissionCode.length()>0">
+            and p.permission_code=#{permissionCode,jdbcType=VARCHAR}
+        </if>
+
+
+    </select>
+</mapper>

@@ -1,0 +1,7 @@
+spring:
+  web:
+    resources:
+      add-mappings: false # 一般springboot捕获到404的时候会去加载springboot框架里的404页面，所以不会走我们捕获404异常的代码，如果要走我们自己的代码，就得禁止静态资源的映射
+
+  mvc:
+    throw-exception-if-no-handler-found: true #使springboot可以捕获到404异常：

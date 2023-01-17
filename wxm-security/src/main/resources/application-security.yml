@@ -1,0 +1,44 @@
+security:
+  cross:
+    # 允许跨域的请求源地址
+    origins: http://localhost:8080,http://127.0.0.1:8080
+
+    # 白名单
+  white:
+    list:
+      ips: 127.0.0.1
+      urlPatterns: /*
+      ignoreUrl: /favicon.ico
+
+  # 防sql注入
+  inject:
+    sql:
+      IllegalCharacter: and | execute|insert|select|delete |update | count|drop|master|truncate|char |declare|sitename|net user|xp_cmdshell|like'|exec|execute|insert|create |table|from|grant| use |group_concat|column_name|information_schema.columns|table_schema|union|where| or |--|(+)|like
+      urlPatterns: /*
+      ignoreUrl: /favicon.ico
+      needVerifyMediaTypes: application/javascript,application/json,application/xml,text/html,text/xml,text/plain
+      unfriendlyApi: /test/msg2,/test/msg/{tranCode}
+      base64EncodeApi: /gateway/rbac/{transCode}
+      ignoreConfig:
+        - { url: /favicon.ico,characters: allIgnore}
+        - { url: /gateway/rbac/52001,/gateway/rbac/52001 ,characters: delete}
+        - { url: /test ,characters: delete,select}
+
+  # 防SXX攻击
+  script:
+    xss:
+      IllegalCharacter: <body|<embed|<frame|<script|<frameset|<html|<iframe|<img|<style|<object|alert(
+      urlPatterns: /*
+      ignoreUrl: /favicon.ico
+      needVerifyMediaTypes: application/javascript,application/json,application/xml,text/html,text/xml,text/plain
+      unfriendlyApi: /test/msg2,/test/msg/{tranCode}
+      base64EncodeApi: /gateway/rbac/{transCode}
+
+# 约定默认：
+# 1、get请求方法：@RequestParam 和 @PathVariable  =》取参数名和参数值校验
+# 2、post请求方法：@RequestBody 和 @PathVariable  =》读取流校验
+# 不应该同时出现 @RequestBody  和 普通参数的 方法，如果出现请单独配置(unfriendlyApi)方法，并单独校验 @RequestBody中的值
+# 入参的值默认不是base64编码格式，如果是，需要配置方法base64EncodeApi
+
+# 3、非application/javascript,application/json,application/xml,text/html,text/xml,text/plain 这种请求类型的采用2;文件等form-data,stream等采用 1、模式校验
+# 4、文件上传的这类：采用   @RequestParam(value="files", required = false) MultipartFile[] files  可以是单个文件的 MultipartFile  files  ，与1相同；如果有其他参数，需要单独给方法做交易

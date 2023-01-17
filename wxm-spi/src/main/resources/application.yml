@@ -1,0 +1,8 @@
+server:
+  port: 9702
+  servlet:
+    context-path: /wxmSpi
+spring:
+  profiles:
+    active: datax,druid,oss,redis,security
+

@@ -1,0 +1,91 @@
+卷 M 的文件夹 PATH 列表
+卷序列号为 18C6-0FFF
+M:.
+│  .gitignore
+│  HELP.md
+│  mvnw
+│  mvnw.cmd
+│  pom.xml
+│  wxm-api.iml
+│  wxm-api.txt
+│  
+├─.mvn
+│  └─wrapper
+│          maven-wrapper.jar
+│          maven-wrapper.properties
+│          
+├─src
+│  ├─main
+│  │  ├─java
+│  │  │  └─com
+│  │  │      └─wxm
+│  │  │          └─api
+│  │  │              │  WxmApiApplication.java
+│  │  │              │  
+│  │  │              ├─controller
+│  │  │              │      GatewayController.java
+│  │  │              │      
+│  │  │              ├─facade
+│  │  │              │      Facade.java
+│  │  │              │      SubQuartz.java
+│  │  │              │      SubRbac.java
+│  │  │              │      外观模式.md
+│  │  │              │      
+│  │  │              ├─service
+│  │  │              │  │  IGatewayService.java
+│  │  │              │  │  
+│  │  │              │  └─imp
+│  │  │              │          GatewayService.java
+│  │  │              │          
+│  │  │              └─test
+│  │  │                      Test.java
+│  │  │                      
+│  │  └─resources
+│  │      │  application.yml
+│  │      │  
+│  │      ├─static
+│  │      └─templates
+│  └─test
+│      └─java
+│          └─com
+│              └─wxm
+│                  └─api
+│                          WxmApiApplicationTests.java
+│                          
+└─target
+    ├─classes
+    │  │  application.yml
+    │  │  
+    │  └─com
+    │      └─wxm
+    │          └─api
+    │              │  WxmApiApplication.class
+    │              │  
+    │              ├─controller
+    │              │      GatewayController.class
+    │              │      
+    │              ├─facade
+    │              │      Facade.class
+    │              │      SubQuartz.class
+    │              │      SubRbac.class
+    │              │      
+    │              ├─service
+    │              │  │  IGatewayService.class
+    │              │  │  
+    │              │  └─imp
+    │              │          GatewayService.class
+    │              │          
+    │              └─test
+    │                      Test$TestBean.class
+    │                      Test.class
+    │                      
+    ├─generated-sources
+    │  └─annotations
+    ├─generated-test-sources
+    │  └─test-annotations
+    └─test-classes
+        └─com
+            └─wxm
+                └─api
+                        WxmApiApplicationTests.class
+                        

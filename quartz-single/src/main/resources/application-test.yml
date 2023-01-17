@@ -1,0 +1,4 @@
+quartz:
+  my:
+    ordinary:
+      message: This is my Test message!
