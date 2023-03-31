@@ -14,33 +14,33 @@
     </resultMap>
 
     <select id="getCount" resultType="java.lang.Long">
-        select count(1) from qrtz_job_details
+        select count(1) from QRTZ_JOB_DETAILS
     </select>
 
     <select id="selectJobDetailAndTriggerList" resultMap="jobDetailAndTriggerMap">
-        SELECT DISTINCT qrtz_job_details.SCHED_NAME,
-                        qrtz_job_details.JOB_NAME,
-                        qrtz_job_details.JOB_GROUP,
-                        qrtz_job_details.JOB_CLASS_NAME,
-                        qrtz_triggers.TRIGGER_NAME,
-                        qrtz_triggers.TRIGGER_GROUP,
-                        qrtz_cron_triggers.CRON_EXPRESSION,
-                        qrtz_cron_triggers.TIME_ZONE_ID,
+        SELECT DISTINCT QRTZ_JOB_DETAILS.SCHED_NAME,
+                        QRTZ_JOB_DETAILS.JOB_NAME,
+                        QRTZ_JOB_DETAILS.JOB_GROUP,
+                        QRTZ_JOB_DETAILS.JOB_CLASS_NAME,
+                        QRTZ_TRIGGERS.TRIGGER_NAME,
+                        QRTZ_TRIGGERS.TRIGGER_GROUP,
+                        QRTZ_CRON_TRIGGERS.CRON_EXPRESSION,
+                        QRTZ_CRON_TRIGGERS.TIME_ZONE_ID,
                         QRTZ_SIMPLE_TRIGGERS.REPEAT_INTERVAL
-        FROM qrtz_job_details
-                 LEFT JOIN qrtz_triggers
-                           ON qrtz_job_details.SCHED_NAME = qrtz_triggers.SCHED_NAME AND
-                              qrtz_job_details.JOB_NAME = qrtz_triggers.JOB_NAME AND
-                              qrtz_job_details.JOB_GROUP = qrtz_triggers.JOB_GROUP
-                 LEFT JOIN qrtz_cron_triggers
-                           ON qrtz_triggers.SCHED_NAME = qrtz_cron_triggers.SCHED_NAME AND
-                              qrtz_triggers.TRIGGER_NAME = qrtz_cron_triggers.TRIGGER_NAME AND
-                              qrtz_triggers.TRIGGER_GROUP = qrtz_cron_triggers.TRIGGER_GROUP
+        FROM QRTZ_JOB_DETAILS
+                 LEFT JOIN QRTZ_TRIGGERS
+                           ON QRTZ_JOB_DETAILS.SCHED_NAME = QRTZ_TRIGGERS.SCHED_NAME AND
+                              QRTZ_JOB_DETAILS.JOB_NAME = QRTZ_TRIGGERS.JOB_NAME AND
+                              QRTZ_JOB_DETAILS.JOB_GROUP = QRTZ_TRIGGERS.JOB_GROUP
+                 LEFT JOIN QRTZ_CRON_TRIGGERS
+                           ON QRTZ_TRIGGERS.SCHED_NAME = QRTZ_CRON_TRIGGERS.SCHED_NAME AND
+                              QRTZ_TRIGGERS.TRIGGER_NAME = QRTZ_CRON_TRIGGERS.TRIGGER_NAME AND
+                              QRTZ_TRIGGERS.TRIGGER_GROUP = QRTZ_CRON_TRIGGERS.TRIGGER_GROUP
                  LEFT JOIN QRTZ_SIMPLE_TRIGGERS
-                           ON qrtz_triggers.SCHED_NAME = QRTZ_SIMPLE_TRIGGERS.SCHED_NAME AND
-                              qrtz_triggers.TRIGGER_NAME = QRTZ_SIMPLE_TRIGGERS.TRIGGER_NAME AND
-                              qrtz_triggers.TRIGGER_GROUP = QRTZ_SIMPLE_TRIGGERS.TRIGGER_GROUP
-        WHERE qrtz_triggers.TRIGGER_NAME = qrtz_cron_triggers.TRIGGER_NAME
+                           ON QRTZ_TRIGGERS.SCHED_NAME = QRTZ_SIMPLE_TRIGGERS.SCHED_NAME AND
+                              QRTZ_TRIGGERS.TRIGGER_NAME = QRTZ_SIMPLE_TRIGGERS.TRIGGER_NAME AND
+                              QRTZ_TRIGGERS.TRIGGER_GROUP = QRTZ_SIMPLE_TRIGGERS.TRIGGER_GROUP
+        WHERE QRTZ_TRIGGERS.TRIGGER_NAME = QRTZ_CRON_TRIGGERS.TRIGGER_NAME
     </select>
 
 
@@ -48,10 +48,10 @@
 
     <select id="selectMap" resultType="java.util.Map" >
         select
-        job.job_class_name as "jobClassName",
-        convert(job.job_data USING utf8)  as "jobData"
-        from qrtz_job_details job
-        where job.job_name=#{jobName,jdbcType=VARCHAR}
-        and job.job_group=#{jobGroup,jdbcType=VARCHAR}
+        job.JOB_CLASS_NAME as "jobClassName",
+        convert(job.JOB_DATA USING utf8)  as "jobData"
+        from QRTZ_JOB_DETAILS job
+        where job.JOB_NAME=#{jobName,jdbcType=VARCHAR}
+        and job.JOB_GROUP=#{jobGroup,jdbcType=VARCHAR}
     </select>
 </mapper>

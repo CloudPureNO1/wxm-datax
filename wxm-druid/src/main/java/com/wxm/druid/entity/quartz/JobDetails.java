@@ -21,7 +21,7 @@ import java.sql.Blob;
 @Accessors(chain = true)
 @Getter
 @Setter
-@TableName("qrtz_job_details")
+@TableName("QRTZ_JOB_DETAILS")
 public class JobDetails {
 
     /**

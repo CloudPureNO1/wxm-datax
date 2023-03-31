@@ -72,9 +72,12 @@ public class SM3Util {
 
 
     public static void main(String[] args) throws EncodeException {
+        log.info("wxm:{}",encode("wxm"));
+        log.info("wsm:{}",encode("wsm"));
+        log.info("wxy:{}",encode("wxy"));
+        log.info("wangxm:{}",encode("wangxm"));
+        log.info("wangsm:{}",encode("wangsm"));
         log.info("wangxy:{}",encode("wangxy"));
-        log.info("wangxm:{}",encode("wangxy"));
         log.info("admin:{}",encode("admin"));
-        log.info("namager:{}",encode("namager"));
     }
 }

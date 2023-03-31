@@ -5,95 +5,95 @@
             parameterType="com.wxm.druid.entity.quartz.nodb.TriggerSelectIn">
         select
         <!-- 调度名称-->
-        t.sched_name,
+        t.SCHED_NAME,
         <!-- 触发器的名称-->
-        t.trigger_name,
+        t.TRIGGER_NAME,
         <!-- 触发器所属组的名称-->
-        t.trigger_group,
+        t.TRIGGER_GROUP,
         <!-- qrtz_job_details表JOB_NAME的外键-->
-        t.job_name,
+        t.JOB_NAME,
         <!-- qrtz_job_details表JOB_GROUP的外键-->
-        t.job_group,
+        t.JOB_GROUP,
         <!-- 详细描述信息-->
-        t.description,
+        t.DESCRIPTION,
         <!-- 下一次触发时间（毫秒），默认为-1，意味不会自动触发-->
-        t.next_fire_time,
+        t.NEXT_FIRE_TIME,
         <!-- 上一次触发时间（毫秒）-->
-        t.prev_fire_time,
+        t.PREV_FIRE_TIME,
         <!-- 优先级-->
-        t.priority,
+        t.PRIORITY,
         <!-- 当前触发器状态（ WAITING：等待； PAUSED：暂停； ACQUIRED：正常执行； BLOCKED：阻塞； ERROR：错误；-->
-        t.trigger_state,
+        t.TRIGGER_STATE,
         <!-- 触发器的类型，使用cron表达式-->
-        t.trigger_type,
+        t.TRIGGER_TYPE,
         <!-- 开始时间-->
-        t.start_time,
+        t.START_TIME,
         <!-- 结束时间-->
-        t.end_time,
+        t.END_TIME,
         <!-- 日程表名称，表qrtz_calendars的CALENDAR_NAME字段的值-->
-        t.calendar_name,
+        t.CALENDAR_NAME,
         <!-- 措施或者是补偿执行的策略-->
-        t.misfire_instr,
+        t.MISFIRE_INSTR,
         <!-- 一个blob字段，存放持久化job对象-->
-        t.job_data
-        from qrtz_triggers t
+        t.JOB_DATA
+        from QRTZ_TRIGGERS t
         where 1=1
         <if test="schedName!=null and schedName.length()>0">
-            and sched_name=#{schedName,jdbcType=VARCHAR}
+            and SCHED_NAME=#{schedName,jdbcType=VARCHAR}
         </if>
         <if test="triggerName!=null and triggerName.length()>0">
-            and trigger_name=#{triggerName,jdbcType=VARCHAR}
+            and TRIGGER_NAME=#{triggerName,jdbcType=VARCHAR}
         </if>
         <if test="triggerGroup!=null and triggerGroup.length()>0">
-            and trigger_group=#{triggerGroup,jdbcType=VARCHAR}
+            and TRIGGER_GROUP=#{triggerGroup,jdbcType=VARCHAR}
         </if>
         <if test="jobName!=null and jobName.length()>0">
-            and job_name=#{jobName,jdbcType=VARCHAR}
+            and JOB_NAME=#{jobName,jdbcType=VARCHAR}
         </if>
         <if test="jobGroup!=null and jobGroup.length()>0">
-            and job_group=#{jobGroup,jdbcType=VARCHAR}
+            and JOB_GROUP=#{jobGroup,jdbcType=VARCHAR}
         </if>
         <if test="triggerState!=null and triggerState.length()>0">
-            and trigger_state=#{triggerState,jdbcType=VARCHAR}
+            and TRIGGER_STATE=#{triggerState,jdbcType=VARCHAR}
         </if>
         <if test="triggerType!=null and triggerType.length()>0">
-            and trigger_type=#{triggerType,jdbcType=VARCHAR}
+            and TRIGGER_TYPE=#{triggerType,jdbcType=VARCHAR}
         </if>
 
         <!--下一次触发时间（毫秒），默认为-1，意味不会自动触发（开始时间）-->
         <if test="nextFireTimeStart!=null and nextFireTimeStart.length()>0">
-            <![CDATA[ and date_format(from_unixtime(next_fire_time/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')>=#{nextFireTimeStart,jdbcType=VARCHAR}]]>
+            <![CDATA[ and date_format(from_unixtime(NEXT_FIRE_TIME/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')>=#{nextFireTimeStart,jdbcType=VARCHAR}]]>
         </if>
         <!--下一次触发时间（毫秒），默认为-1，意味不会自动触发（结束时间）-->
         <if test="nextFireTimeEnd!=null and nextFireTimeEnd.length()>0">
-            <![CDATA[and date_format(from_unixtime(next_fire_time/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')<=#{nextFireTimeEnd,jdbcType=VARCHAR}]]>
+            <![CDATA[and date_format(from_unixtime(NEXT_FIRE_TIME/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')<=#{nextFireTimeEnd,jdbcType=VARCHAR}]]>
         </if>
 
         <!--上一次触发时间（毫秒）（开始时间）-->
         <if test="prevFireTimeStart!=null and prevFireTimeStart.length()>0l">
-            <![CDATA[ and date_format(from_unixtime(prev_fire_time/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')>=#{prevFireTimeStart,jdbcType=VARCHAR}]]>
+            <![CDATA[ and date_format(from_unixtime(PREV_FIRE_TIME/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')>=#{prevFireTimeStart,jdbcType=VARCHAR}]]>
         </if>
         <!--上一次触发时间（毫秒）（结束时间）-->
         <if test="prevFireTimeEnd!=null and prevFireTimeEnd.length()>0">
-            <![CDATA[and date_format(from_unixtime(prev_fire_time/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')<=#{prevFireTimeEnd,jdbcType=VARCHAR}]]>
+            <![CDATA[and date_format(from_unixtime(PREV_FIRE_TIME/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')<=#{prevFireTimeEnd,jdbcType=VARCHAR}]]>
         </if>
 
         <!--开始时间（开始时间）-->
         <if test="startTimeStart!=null and startTimeStart.length()>0">
-            <![CDATA[ and date_format(from_unixtime(start_time/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')>=#{startTimeStart,jdbcType=VARCHAR}]]>
+            <![CDATA[ and date_format(from_unixtime(START_TIME/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')>=#{startTimeStart,jdbcType=VARCHAR}]]>
         </if>
         <!--开始时间（结束时间）-->
         <if test="startTimeEnd!=null and startTimeEnd.length()>0">
-            <![CDATA[and date_format(from_unixtime(start_time/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')<=#{startTimeEnd,jdbcType=VARCHAR}]]>
+            <![CDATA[and date_format(from_unixtime(START_TIME/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')<=#{startTimeEnd,jdbcType=VARCHAR}]]>
         </if>
 
         <!--结束时间（开始时间）-->
         <if test="endTimeStart!=null and endTimeStart.length()>0">
-            <![CDATA[ and date_format(from_unixtime(end_time/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')>=#{endTimeStart,jdbcType=VARCHAR}]]>
+            <![CDATA[ and date_format(from_unixtime(END_TIME/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')>=#{endTimeStart,jdbcType=VARCHAR}]]>
         </if>
         <!--结束时间（结束时间）-->
         <if test="endTimeEnd!=null and endTimeEnd.length()>0">
-            <![CDATA[and date_format(from_unixtime(end_time/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')<=#{endTimeEnd,jdbcType=VARCHAR}]]>
+            <![CDATA[and date_format(from_unixtime(END_TIME/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')<=#{endTimeEnd,jdbcType=VARCHAR}]]>
         </if>
     </select>
 
@@ -102,100 +102,100 @@
             parameterType="com.wxm.druid.entity.quartz.nodb.TriggerSelectIn">
         select
         <!-- 调度名称-->
-        t.sched_name as "schedName",
+        t.SCHED_NAME as "schedName",
         <!-- 触发器的名称-->
-        t.trigger_name as "triggerName",
+        t.TRIGGER_NAME as "triggerName",
         <!-- 触发器所属组的名称-->
-        t.trigger_group as "triggerGroup",
+        t.TRIGGER_GROUP as "triggerGroup",
         <!-- qrtz_job_details表JOB_NAME的外键-->
-        t.job_name as "jobName",
+        t.JOB_NAME as "jobName",
         <!-- qrtz_job_details表JOB_GROUP的外键-->
-        t.job_group as "jobGroup",
+        t.JOB_GROUP as "jobGroup",
         <!-- 详细描述信息-->
-        t.description as "description",
+        t.DESCRIPTION as "description",
         <!-- 下一次触发时间（毫秒），默认为-1，意味不会自动触发-->
-        date_format(from_unixtime(t.next_fire_time/1000,'%Y-%m-%d %h:%i:%s'),'%Y-%m-%d %h:%i:%s') as "nextFireTime",
+        date_format(from_unixtime(t.NEXT_FIRE_TIME/1000,'%Y-%m-%d %h:%i:%s'),'%Y-%m-%d %h:%i:%s') as "nextFireTime",
         <!-- 上一次触发时间（毫秒）-->
-        date_format(from_unixtime(t.prev_fire_time/1000,'%Y-%m-%d %h:%i:%s'),'%Y-%m-%d %h:%i:%s') as "prevFireTime",
+        date_format(from_unixtime(t.PREV_FIRE_TIME/1000,'%Y-%m-%d %h:%i:%s'),'%Y-%m-%d %h:%i:%s') as "prevFireTime",
         <!-- 优先级-->
-        convert(t.priority,char) as "priority",
+        convert(t.PRIORITY,char) as "PRIORITY",
         <!-- 当前触发器状态（ WAITING：等待； PAUSED：暂停； ACQUIRED：正常执行； BLOCKED：阻塞； ERROR：错误；-->
-        t.trigger_state as "triggerState",
+        t.TRIGGER_STATE as "triggerState",
         <!-- 触发器的类型，使用cron表达式-->
-        t.trigger_type as "triggerType",
+        t.TRIGGER_TYPE as "triggerType",
         <!-- 开始时间-->
-        date_format(from_unixtime(t.start_time/1000,'%Y-%m-%d %h:%i:%s'),'%Y-%m-%d %h:%i:%s') as "startTime",
+        date_format(from_unixtime(t.START_TIME/1000,'%Y-%m-%d %h:%i:%s'),'%Y-%m-%d %h:%i:%s') as "startTime",
         <!-- 结束时间-->
-        date_format(from_unixtime(t.end_time/1000,'%Y-%m-%d %h:%i:%s'),'%Y-%m-%d %h:%i:%s') as "endTime",
+        date_format(from_unixtime(t.END_TIME/1000,'%Y-%m-%d %h:%i:%s'),'%Y-%m-%d %h:%i:%s') as "endTime",
         <!-- 日程表名称，表qrtz_calendars的CALENDAR_NAME字段的值-->
-        t.calendar_name as "calendarName",
+        t.CALENDAR_NAME as "calendarName",
         <!-- 措施或者是补偿执行的策略-->
-        t.misfire_instr as "misfireInstr",
+        t.MISFIRE_INSTR as "misfireInstr",
         <!-- 一个blob字段，存放持久化job对象-->
-        <!-- convert(t.job_data USING utf8) as "jobData",-->
+        <!-- convert(t.JOB_DATA USING utf8) as "jobData",-->
         <!--qrtz_cron_triggers-->
-        (select cron.cron_expression from qrtz_cron_triggers cron where cron.trigger_name= t.trigger_name and cron.trigger_group=t.trigger_group) as "cronExpression",
-        (select cron.time_zone_id from qrtz_cron_triggers cron where cron.trigger_name= t.trigger_name and cron.trigger_group=t.trigger_group) as "timeZoneId",
-        (select job.job_class_name from qrtz_job_details job where job.job_name= t.job_name and job.job_group=t.job_group) as "jobClassName",
-        (select convert(job.job_data USING utf8) from qrtz_job_details job where job.job_name= t.job_name and job.job_group=t.job_group) as "jobData"
-        from qrtz_triggers t
+        (select cron.CRON_EXPRESSION from QRTZ_CRON_TRIGGERS cron where cron.TRIGGER_NAME= t.TRIGGER_NAME and cron.TRIGGER_GROUP=t.TRIGGER_GROUP) as "cronExpression",
+        (select cron.TIME_ZONE_ID from QRTZ_CRON_TRIGGERS cron where cron.TRIGGER_NAME= t.TRIGGER_NAME and cron.TRIGGER_GROUP=t.TRIGGER_GROUP) as "timeZoneId",
+        (select job.JOB_CLASS_NAME from QRTZ_JOB_DETAILS job where job.JOB_NAME= t.JOB_NAME and job.JOB_GROUP=t.JOB_GROUP) as "jobClassName",
+        (select convert(job.JOB_DATA USING utf8) from QRTZ_JOB_DETAILS job where job.JOB_NAME= t.JOB_NAME and job.JOB_GROUP=t.JOB_GROUP) as "jobData"
+        from QRTZ_TRIGGERS t
         where 1=1
         <if test="schedName!=null and schedName.length()>0">
-            and sched_name=#{schedName,jdbcType=VARCHAR}
+            and SCHED_NAME=#{schedName,jdbcType=VARCHAR}
         </if>
         <if test="triggerName!=null and triggerName.length()>0">
-            and trigger_name=#{triggerName,jdbcType=VARCHAR}
+            and TRIGGER_NAME=#{triggerName,jdbcType=VARCHAR}
         </if>
         <if test="triggerGroup!=null and triggerGroup.length()>0">
-            and trigger_group=#{triggerGroup,jdbcType=VARCHAR}
+            and TRIGGER_GROUP=#{triggerGroup,jdbcType=VARCHAR}
         </if>
         <if test="jobName!=null and jobName.length()>0">
-            and job_name=#{jobName,jdbcType=VARCHAR}
+            and JOB_NAME=#{jobName,jdbcType=VARCHAR}
         </if>
         <if test="jobGroup!=null and jobGroup.length()>0">
-            and job_group=#{jobGroup,jdbcType=VARCHAR}
+            and JOB_GROUP=#{jobGroup,jdbcType=VARCHAR}
         </if>
         <if test="triggerState!=null and triggerState.length()>0">
-            and trigger_state=#{triggerState,jdbcType=VARCHAR}
+            and TRIGGER_STATE=#{triggerState,jdbcType=VARCHAR}
         </if>
         <if test="triggerType!=null and triggerType.length()>0">
-            and trigger_type=#{triggerType,jdbcType=VARCHAR}
+            and TRIGGER_TYPE=#{triggerType,jdbcType=VARCHAR}
         </if>
 
         <!--下一次触发时间（毫秒），默认为-1，意味不会自动触发（开始时间）-->
         <if test="nextFireTimeStart!=null and nextFireTimeStart.length()>0">
-            <![CDATA[ and date_format(from_unixtime(next_fire_time/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')>=#{nextFireTimeStart,jdbcType=VARCHAR}]]>
+            <![CDATA[ and date_format(from_unixtime(NEXT_FIRE_TIME/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')>=#{nextFireTimeStart,jdbcType=VARCHAR}]]>
         </if>
         <!--下一次触发时间（毫秒），默认为-1，意味不会自动触发（结束时间）-->
         <if test="nextFireTimeEnd!=null and nextFireTimeEnd.length()>0">
-            <![CDATA[and date_format(from_unixtime(next_fire_time/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')<=#{nextFireTimeEnd,jdbcType=VARCHAR}]]>
+            <![CDATA[and date_format(from_unixtime(NEXT_FIRE_TIME/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')<=#{nextFireTimeEnd,jdbcType=VARCHAR}]]>
         </if>
 
         <!--上一次触发时间（毫秒）（开始时间）-->
         <if test="prevFireTimeStart!=null and prevFireTimeStart.length()>0l">
-            <![CDATA[ and date_format(from_unixtime(prev_fire_time/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')>=#{prevFireTimeStart,jdbcType=VARCHAR}]]>
+            <![CDATA[ and date_format(from_unixtime(PREV_FIRE_TIME/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')>=#{prevFireTimeStart,jdbcType=VARCHAR}]]>
         </if>
         <!--上一次触发时间（毫秒）（结束时间）-->
         <if test="prevFireTimeEnd!=null and prevFireTimeEnd.length()>0">
-            <![CDATA[and date_format(from_unixtime(prev_fire_time/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')<=#{prevFireTimeEnd,jdbcType=VARCHAR}]]>
+            <![CDATA[and date_format(from_unixtime(PREV_FIRE_TIME/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')<=#{prevFireTimeEnd,jdbcType=VARCHAR}]]>
         </if>
 
         <!--开始时间（开始时间）-->
         <if test="startTimeStart!=null and startTimeStart.length()>0">
-            <![CDATA[ and date_format(from_unixtime(start_time/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')>=#{startTimeStart,jdbcType=VARCHAR}]]>
+            <![CDATA[ and date_format(from_unixtime(START_TIME/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')>=#{startTimeStart,jdbcType=VARCHAR}]]>
         </if>
         <!--开始时间（结束时间）-->
         <if test="startTimeEnd!=null and startTimeEnd.length()>0">
-            <![CDATA[and date_format(from_unixtime(start_time/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')<=#{startTimeEnd,jdbcType=VARCHAR}]]>
+            <![CDATA[and date_format(from_unixtime(START_TIME/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')<=#{startTimeEnd,jdbcType=VARCHAR}]]>
         </if>
 
         <!--结束时间（开始时间）-->
         <if test="endTimeStart!=null and endTimeStart.length()>0">
-            <![CDATA[ and date_format(from_unixtime(end_time/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')>=#{endTimeStart,jdbcType=VARCHAR}]]>
+            <![CDATA[ and date_format(from_unixtime(END_TIME/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')>=#{endTimeStart,jdbcType=VARCHAR}]]>
         </if>
         <!--结束时间（结束时间）-->
         <if test="endTimeEnd!=null and endTimeEnd.length()>0">
-            <![CDATA[and date_format(from_unixtime(end_time/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')<=#{endTimeEnd,jdbcType=VARCHAR}]]>
+            <![CDATA[and date_format(from_unixtime(END_TIME/1000,'%Y-%m-%d %h:%i:%s'),'%Y%m%d%h%i%s')<=#{endTimeEnd,jdbcType=VARCHAR}]]>
         </if>
         <choose>
             <when test="dataXFlag!=null and dataXFlag.length()>0">
@@ -206,7 +206,7 @@
             </otherwise>
         </choose>
         (
-            select 1 from data_x_details dx where dx.file_name = concat(substr(t.trigger_name,2),'.json')
+            select 1 from data_x_details dx where dx.file_name = concat(substr(t.TRIGGER_NAME,2),'.json')
         )
     </select>
 </mapper>

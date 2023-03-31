@@ -1,0 +1,4 @@
+server:
+  port: 2211
+  servlet:
+    context-path: /wxmOpencv

@@ -9,7 +9,9 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 public class WxmZTestApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WxmZTestApplication.class, args);
+
+        SpringApplication.run(WxmZTestApplication.class,
+                args);
     }
 
 }

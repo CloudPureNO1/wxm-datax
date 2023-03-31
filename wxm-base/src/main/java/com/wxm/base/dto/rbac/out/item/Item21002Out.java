@@ -59,4 +59,11 @@ public class Item21002Out {
      */
     private Date updateTime;
 
+    /**
+     * 最近一次操作者
+     */
+    private String operator;
+
+
+
 }

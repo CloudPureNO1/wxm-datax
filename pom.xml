@@ -46,6 +46,9 @@
         <module>wxm-security</module>
         <module>security-oauth2</module>
         <module>wxm-z-test</module>
+        <module>wxm-push</module>
+        <module>wxm-optencv</module>
+        <module>wxm-opencv</module>
     </modules>
 
     <dependencies>

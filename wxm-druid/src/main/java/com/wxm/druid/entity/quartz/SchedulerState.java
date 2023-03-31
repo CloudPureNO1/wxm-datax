@@ -16,7 +16,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName("qrtz_scheduler_state")
+@TableName("QRTZ_SCHEDULER_STATE")
 public class SchedulerState {
 
     /**

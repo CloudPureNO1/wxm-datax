@@ -16,7 +16,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName("qrtz_simple_triggers")
+@TableName("QRTZ_SIMPLE_TRIGGERS")
 public class SimpleTriggers {
 
     /**

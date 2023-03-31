@@ -49,6 +49,8 @@ public class TokenUtil {
                     // 重置redis时间
                     redisTemplate.expire(userKey,EXP_TIME,TimeUnit.MILLISECONDS);
                     redisTemplate.expire(token.getAccessToken(),EXP_TIME,TimeUnit.MILLISECONDS);
+                    //   重置授权
+                    extracted(redisTemplate, user, token);
                     return new DataRtn().success().message("成功").data(token);
                 }
             }
@@ -66,6 +68,11 @@ public class TokenUtil {
         token = new Token(MyUUIDUtil.uuid(user.getUsername()), System.currentTimeMillis() + EXP_TIME);
         //
         redisTemplate.opsForValue().set(userKey,token,EXP_TIME, TimeUnit.MILLISECONDS);
+        extracted(redisTemplate, user, token);
+        return new DataRtn().success().message("成功").data(token);
+    }
+
+    private static void extracted(RedisTemplate redisTemplate, User user, Token token) {
         // access_token 对应的授权用户信息
         // springsecurity 的 UserDetails 没有无参构造方法，Jacksion 序列化的时候会报错，存储自定义的
         // MyUserDetails
@@ -75,7 +82,6 @@ public class TokenUtil {
                 .setCredentialsNonExpired(user.isCredentialsNonExpired()).setEnabled(user.isEnabled())
                 .setAuthorities(user.getAuthorities());
         redisTemplate.opsForValue().set(token.getAccessToken(), myUserDetails,EXP_TIME, TimeUnit.MILLISECONDS);
-        return new DataRtn().success().message("成功").data(token);
     }
 
     public static String getUserKey(UserDetails user){

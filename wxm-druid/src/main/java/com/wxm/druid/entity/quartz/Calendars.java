@@ -18,7 +18,7 @@ import java.sql.Blob;
  */
 @Getter
 @Setter
-@TableName("qrtz_calendars")
+@TableName("QRTZ_CALENDARS")
 public class Calendars {
 
     /**

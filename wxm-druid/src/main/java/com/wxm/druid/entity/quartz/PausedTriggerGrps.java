@@ -16,7 +16,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName("qrtz_paused_trigger_grps")
+@TableName("QRTZ_PAUSED_TRIGGER_GRPS")
 public class PausedTriggerGrps {
 
     /**

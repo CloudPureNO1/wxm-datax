@@ -16,7 +16,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName("qrtz_cron_triggers")
+@TableName("QRTZ_CRON_TRIGGERS")
 public class CronTriggers {
 
     /**

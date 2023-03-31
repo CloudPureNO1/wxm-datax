@@ -1,0 +1,5 @@
+server:
+  port: 1322
+
+  servlet:
+    context-path: /wxmPush

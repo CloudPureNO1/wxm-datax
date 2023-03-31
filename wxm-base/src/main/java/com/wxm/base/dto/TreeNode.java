@@ -22,6 +22,8 @@ public class TreeNode {
     @JSONField(serialzeFeatures = {SerializerFeature.WriteMapNullValue})
     private String title;
     @JSONField(serialzeFeatures = {SerializerFeature.WriteMapNullValue})
+    private String titleEn;
+    @JSONField(serialzeFeatures = {SerializerFeature.WriteMapNullValue})
     private Boolean isLeaf;
     @JSONField(serialzeFeatures = {SerializerFeature.WriteMapNullValue})
     private String icon;

@@ -1025,11 +1025,10 @@ public class BizRbacService implements IBizRbacService {
     }
 
     @Override
-    public Rbac41006Out service41006(@Valid Rbac41006In rbac41006In) throws BizSvcException, DbSvcException {
+    public Rbac41006Out service41006(Rbac41006In rbac41006In) throws BizSvcException, DbSvcException {
         try {
             SecurityContext securityContext = SecurityContextHolder.getContext();
             UserDetails userDetail = (UserDetails) securityContext.getAuthentication().getPrincipal();
-            ;
             String username = userDetail.getUsername();
             List<WxmResource> listDb = wxmResourceService.queryByUsername(username);
             if (CollectionUtils.isEmpty(listDb)) {
@@ -1039,6 +1038,7 @@ public class BizRbacService implements IBizRbacService {
                 TreeNode treeNode = new TreeNode();
                 treeNode.setNodeId(String.valueOf(resource.getResourceId()));
                 treeNode.setTitle(resource.getResourceName());
+                treeNode.setTitleEn(resource.getResourceNameEn());
                 treeNode.setParentId(resource.getParentId() == null ? "0" : String.valueOf(resource.getParentId()));
                 treeNode.setIcon(resource.getResourceIcon());
                 treeNode.setUrl(resource.getResourceUrl());

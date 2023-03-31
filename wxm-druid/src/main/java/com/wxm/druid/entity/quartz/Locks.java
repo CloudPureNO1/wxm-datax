@@ -16,7 +16,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName("qrtz_locks")
+@TableName("QRTZ_LOCKS")
 public class Locks {
 
     /**

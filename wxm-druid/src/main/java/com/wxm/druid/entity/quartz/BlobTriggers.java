@@ -18,13 +18,13 @@ import java.sql.Blob;
  */
 @Getter
 @Setter
-@TableName("qrtz_blob_triggers")
+@TableName("QRTZ_BLOB_TRIGGERS")
 public class BlobTriggers {
 
     /**
      * 调度名称
      */
-    @TableField(value = "SCHED_NAME")
+    @TableField(value = "sched_name")
     @MppMultiId
     private String schedName;
 

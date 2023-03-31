@@ -18,7 +18,7 @@ import java.math.BigDecimal;
  */
 @Getter
 @Setter
-@TableName("qrtz_simprop_triggers")
+@TableName("QRTZ_SIMPROP_TRIGGERS")
 public class SimpropTriggers {
 
     /**

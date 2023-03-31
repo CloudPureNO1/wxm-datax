@@ -45,6 +45,12 @@ public class WxmResource {
     private String resourceName;
 
     /**
+     * 资源名称（英文）国际化使用
+     */
+    @TableField("resource_name_en")
+    private String resourceNameEn;
+
+    /**
      * 资源地址url
      */
     @TableField("resource_url")

@@ -10,9 +10,9 @@ spring:
       datasource:
         # 主数据源（自定义名称，可以任意）
         master:
-          url: jdbc:mysql://127.0.0.1:3306/wxm?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useAffectedRows=true&zeroDateTimeBehavior=convertToNull
+          url: jdbc:mysql://192.168.56.101:3306/wxm?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useAffectedRows=true&zeroDateTimeBehavior=convertToNull
           username: wxm
-          password: wxm
+          password: WXM77wxy@NO1
           driver-class-name: com.mysql.cj.jdbc.Driver
           type: com.alibaba.druid.pool.DruidDataSource
           # 连接池配置
@@ -33,9 +33,9 @@ spring:
 
         # 第二个数据源名称（自定义，可以任意）   quartz 的表结
         quartz:
-          url: jdbc:mysql://127.0.0.1:3306/qjob?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useAffectedRows=true&zeroDateTimeBehavior=convertToNull
+          url: jdbc:mysql://192.168.56.101:3306/qjob?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useAffectedRows=true&zeroDateTimeBehavior=convertToNull
           username: qjob
-          password: qjob
+          password: WXM77wxy@NO1
           driver-class-name: com.mysql.cj.jdbc.Driver
           type: com.alibaba.druid.pool.DruidDataSource
           # 连接池配置

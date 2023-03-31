@@ -76,7 +76,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
 
         List<GrantedAuthority> authorities = new ArrayList<>();
-        // roleList.stream().forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getRoleCode())));
         roleList.stream().forEach(role -> authorities.add(new MySimpleGrantedAuthority(role.getRoleCode())));
         authorities.add(new MySimpleGrantedAuthority("login"));
         authorities.add(new MySimpleGrantedAuthority("token"));

@@ -68,7 +68,7 @@ public class MyAuthenticationFailureHandler implements AuthenticationFailureHand
             //其他错误
             dataRtn=new DataRtn<>(SecurityInfoEnum.UN_DEFINED_EXC.getCode(),SecurityInfoEnum.UN_DEFINED_EXC.getMsg());
         }
-        log.error("【[]】{}:{}",dataRtn.getCode(),dataRtn.getMessage(),dataRtn.getDetailMsg());
+        log.error("【{}】{}:{}",dataRtn.getCode(),dataRtn.getMessage(),dataRtn.getDetailMsg());
         httpServletResponse.getWriter().write(JSON.toJSONString(dataRtn));
     }
 }

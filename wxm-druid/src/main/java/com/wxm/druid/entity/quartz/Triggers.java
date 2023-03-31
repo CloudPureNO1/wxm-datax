@@ -18,7 +18,7 @@ import java.sql.Blob;
  */
 @Getter
 @Setter
-@TableName("qrtz_triggers")
+@TableName("QRTZ_TRIGGERS")
 public class Triggers {
 
     /**

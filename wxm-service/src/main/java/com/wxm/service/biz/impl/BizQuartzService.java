@@ -434,7 +434,9 @@ public class BizQuartzService implements IBizQuartzService {
                 wrapper.eq("trigger_name", triggers.getTriggerName());
                 wrapper.eq("trigger_group", triggers.getTriggerGroup());
                 CronTriggers cronTriggers = cronTriggersService.getOne(wrapper);
-                if (cronTriggers == null || !StringUtils.hasLength(cronTriggers.getCronExpression())) {
+                if (cronTriggers == null || !StringUtils.hasLength(cronTriggers.getCronExpression())
+                ||(!cron.equals(cronTriggers.getCronExpression()))
+                ) {
                     quartzService.rescheduleJob(quartz13001In.getTriggerIn().getTriggerName(), quartz13001In.getTriggerIn().getTriggerGroup(), cron);
                 } else {
                     quartzService.resumeJob(quartz13001In.getTriggerIn().getJobName(), quartz13001In.getTriggerIn().getJobGroup());
