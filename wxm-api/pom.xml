@@ -40,6 +40,13 @@
             <artifactId>wxm-security</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
+        <!--消息推送-->
+        <dependency>
+            <groupId>com.wxm</groupId>
+            <artifactId>wxm-push</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 <!--
  外部接口 使用 springsecurit+oauth2 的客户端模式
  内部接口，包含权限系统，采用 springsecurity

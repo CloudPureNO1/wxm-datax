@@ -11,6 +11,7 @@ import org.opencv.core.Point;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.videoio.VideoCapture;
 import org.opencv.videoio.Videoio;
+import org.springframework.util.StringUtils;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -102,6 +103,7 @@ public class TackPictureWithWebsocket {
     private VideoCapture camera = null;
 
     private String uid;
+    private String uuid;
 
     private void initBox() {
         int wh = (int) (cameraHeight > cameraWidth ? cameraHeight : cameraWidth);
@@ -211,8 +213,11 @@ public class TackPictureWithWebsocket {
                 // 1. 返回 图片list
                 System.out.println("图片：" + JSON.toJSONString(list));
 
-
-                WebsocketServer.sendMessage(JSON.toJSONString(list),uid);
+                if(StringUtils.hasLength(uuid)){
+                    WebsocketServer.sendMessage(JSON.toJSONString(list),uid,uuid);
+                }else{
+                    WebsocketServer.sendMessage(JSON.toJSONString(list),uid);
+                }
 
                 camera.release();
                 // 2. 退出
@@ -266,8 +271,9 @@ public class TackPictureWithWebsocket {
         frame.setResizable(false);
     }
 
-    public TackPictureWithWebsocket(String id) throws Exception {
-        uid = id;
+    public TackPictureWithWebsocket(String uid,String uuid) throws Exception {
+        this.uid = uid;
+        this.uuid = uuid;
         /**
          * 数 “摄像头ID号”：摄像设备（摄像头）的 ID 编号，默认值为 -1，表示随机选取一个摄像头。
          *
@@ -406,7 +412,7 @@ public class TackPictureWithWebsocket {
 
     public static void main(String[] args) throws Exception {
 
-        new TackPictureWithWebsocket("wxm");
+        new TackPictureWithWebsocket("wxm","wxm");
     }
 
 

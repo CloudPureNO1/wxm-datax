@@ -4,8 +4,6 @@ package com.wxm.test.main;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Base64;
-
 
 /**
  * <p></p>
@@ -19,19 +17,8 @@ import java.util.Base64;
 public class Test {
 
     public static void main(String[] args) {
-       String str="ChromeFilled\n" +
-               "Eleme\n" +
-               "ElemeFilled\n" +
-               "ElementPlus\n" +
-               "Shop\n" +
-               "SwitchFilled\n" +
-               "WindPower";
 
-       String [] rs=str.split("\n");
-       System.out.println(JSON.toJSONString(rs));
     }
-
-
 
 
 }

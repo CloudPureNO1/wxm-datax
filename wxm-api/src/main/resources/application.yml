@@ -4,5 +4,5 @@ server:
     context-path: /wxmApi
 spring:
   profiles:
-    active: base,datax,druid,oss,redis,ex,security,test
+    active: base,datax,druid,oss,redis,ex,security,push,test
 

@@ -4,9 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.wxm.push.server.WebsocketServer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -17,8 +15,15 @@ import java.util.Map;
  * websocket
  * 消息推送(个人和广播)
  */
+@RequestMapping("/push")
 @Controller
 public class WebSocketController {
+
+    private final WebsocketServer ws;
+
+    public WebSocketController(WebsocketServer ws) {
+        this.ws = ws;
+    }
 
 
     /**
@@ -26,11 +31,11 @@ public class WebSocketController {
      *
      * @return
      */
-    @RequestMapping(value = "/admin")
+    @RequestMapping(value = "/getOnlineUsers")
     @ResponseBody
     public Map<String,Object> admin() {
-        int num = WebsocketServer.getOnlineNum();
-        List<String> list = WebsocketServer.getOnlineUsers();
+        int num = ws.getOnlineNum();
+        List<String> list = ws.getOnlineUsers();
 
         Map<String,Object> map=new HashMap<>();
         map.put("onlineNum",num);
@@ -52,7 +57,7 @@ public class WebSocketController {
         String msg=json.getString("msg");
         JSONArray jsonArray=json.getJSONArray("userList");
         List<String>userList=jsonArray.toJavaList(String.class);
-        WebsocketServer.SendMany(msg, userList);
+        ws.SendMany(msg, userList);
         return "success";
     }
 
@@ -64,7 +69,7 @@ public class WebSocketController {
     @PostMapping("/sendAll")
     @ResponseBody
     public String sendAll(@RequestParam("msg") String msg) {
-        WebsocketServer.sendAll(msg);
+        ws.sendAll(msg);
         return "success";
     }
 }

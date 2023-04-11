@@ -1,59 +1,47 @@
-package com.wxm.opencv.websocket.server;
+package com.wxm.push.server;
 
-import com.alibaba.fastjson.JSON;
-import com.wxm.opencv.client.TackPictureWithWebsocket;
-import com.wxm.opencv.websocket.dto.Client;
+import com.wxm.push.dto.Client;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.stream.Collectors;
 
 /**
- * 此处Websocket 是单独打包拍照客户端使用，那么一个系统只是用一个socket 连接，不同拍照的时候，传入不同的序列值
- * <p>
- * <p>
- * Websocket Server 参数 uid 对应为 {@link Client}  websocket链接时的socket 唯一标识
- * Websocket Server 参数 uuid 对应为 {@link Client}  同一个socket 不同地方调用时，传入的唯一主键
+ * Websocket Server 参数 uid 对应为 {@link com.wxm.push.dto.Client}
  *
  * @author wangsm
  * @version 1.0.0
  * @date 2023-03-10 16:55:54
  */
 @Slf4j
-//@ServerEndpoint(value = "/socketServer/{uid}/{uuid}") 不采用，否则连接的时候，必须是这种形式，第二个uuid采用参数
-@ServerEndpoint(value = "/socketServer/{uid}")
+@ServerEndpoint(value = "/socketServer-old/{uid}")
 @Component
-public class WebsocketServer {
+public class WebsocketServerold {
 
     /**
      * 用线程安全的CopyOnWriteArraySet来存放客户端连接的信息
      **/
+//    private static CopyOnWriteArraySet<Client> socketServers = new CopyOnWriteArraySet<>();
     private static CopyOnWriteArraySet<Client> socketServers = new CopyOnWriteArraySet<>();
 
     /**
      * websocket封装的session,信息推送，就是通过它来信息推送
      */
-    private Session session;
+    private javax.websocket.Session session;
 
     /**
+     *
      * 服务端的userName,因为用的是set，每个客户端的username必须不一样，否则会被覆盖。
      * 要想完成ui界面聊天的功能，服务端也需要作为客户端来接收后台推送用户发送的信息
      */
-    private final static String SYS_USERNAME = "SYS_22-wxm-11_WXM";
+    private final static String SYS_USERNAME = "wxm";
 
-    /**
-     * 接收到以此开头的信息标识为：打开摄像头拍照，而不是发送信息
-     */
-    private final static String SYS_TAKE_PICTURE_WXM = "Send(SYS_22-TAKE-PICTURE-11_WXM)";
 
     /**
      * 用户连接时触发，我们将其添加到
@@ -62,7 +50,6 @@ public class WebsocketServer {
      * @throws
      * @Param session
      * @Param uid
-     * @Param uuid 不能作为Websocket 的唯一表示
      * @Return void
      * @Author wangsm
      * @Date 2023/3/10 17:29
@@ -71,29 +58,8 @@ public class WebsocketServer {
     @OnOpen
     public void open(Session session, @PathParam(value = "uid") String uid) {
         this.session = session;
-        if (!uid.equals(session.getId())) {
-            socketServers.add(new Client(uid, session));
-            log.info("【{}】连接成功", uid);
-        }else {
-            log.info("【{}】连接成功", uid);
-        }
-        /**
-         * 先通过基本路径连接，后通过调用发信息的放缩，打开摄像头
-         */
-//        try {
-//            Map<String,String> paramMap = session.getPathParameters();
-//            if(paramMap.isEmpty()){
-//                throw new RuntimeException("连接失败：参数为空");
-//            }
-//            String uuid=paramMap.get("uuid");
-//            if(StringUtils.hasLength(uuid)){
-//                // 打开摄像头
-//                new TackPictureWithWebsocket(uuid);
-//            }
-//
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
+        socketServers.add(new Client(uid, session));
+        log.info("客户端:【{}】连接成功", uid);
     }
 
     /**
@@ -104,25 +70,11 @@ public class WebsocketServer {
      * @param message
      */
     @OnMessage
-    public void onMessage(String message,@PathParam(value = "uid") String uid) {
-        if (message.startsWith(SYS_TAKE_PICTURE_WXM)) {
-            try {
-                String uuid=message.substring(message.indexOf("::") + 2);
-                if(!StringUtils.hasLength(uuid)){
-                    throw new RuntimeException("uuid 不能为空");
-                }
-                // 打开摄像头
-                new TackPictureWithWebsocket(uid,uuid);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            Client client = socketServers.stream().filter(cli -> cli.getSession() == session).collect(Collectors.toList()).get(0);
-            sendMessage(client.getUid() + ":" + message, SYS_USERNAME);
-            log.info("【{}】发送信息:{}", client.getUid(), message);
-        }
+    public void onMessage(String message) {
+        Client client = socketServers.stream().filter(cli -> cli.getSession() == session).collect(Collectors.toList()).get(0);
+        sendMessage(client.getUid() + "<--" + message, SYS_USERNAME);
+        log.info("客户端:【{}】发送信息:{}", client.getUid(), message);
     }
-
 
     /**
      * 连接关闭触发，通过sessionId来移除
@@ -132,7 +84,7 @@ public class WebsocketServer {
     public void onClose() {
         socketServers.forEach(client -> {
             if (client.getSession().getId().equals(session.getId())) {
-                log.info("【{}】断开连接", client.getUid());
+                log.info("客户端:【{}】断开连接", client.getUid());
                 socketServers.remove(client);
             }
         });
@@ -148,23 +100,23 @@ public class WebsocketServer {
         socketServers.forEach(client -> {
             if (client.getSession().getId().equals(session.getId())) {
                 socketServers.remove(client);
-                log.error("【{}】发生异常", client.getUid());
+                log.error("客户端:【{}】发生异常", client.getUid());
                 error.printStackTrace();
             }
         });
     }
 
     /**
-     * 信息发送的方法，通过客户端的udi
+     * 信息发送的方法，通过客户端的userName
      * 拿到其对应的session，调用信息推送的方法
      *
      * @param message
-     * @param uid
+     * @param userName
      */
-    public synchronized static void sendMessage(String message, String uid) {
+    public synchronized static void sendMessage(String message, String userName) {
 
         socketServers.forEach(client -> {
-            if (uid.equals(client.getUid())) {
+            if (userName.equals(client.getUid())) {
                 try {
                     client.getSession().getBasicRemote().sendText(message);
                     log.info("服务端推送给客户端 :【{}】", client.getUid(), message);
@@ -175,29 +127,6 @@ public class WebsocketServer {
         });
     }
 
-    /**
-     * 信息发送的方法，通过客户端的udi
-     * 拿到其对应的session，调用信息推送的方法
-     *
-     * @param message
-     * @param uid
-     */
-    public synchronized static void sendMessage(String message, String uid,String uuid) {
-        Map<String,Object>map=new HashMap<>();
-        map.put("uid",uid);
-        map.put("uuid",uuid);
-        map.put("data",message);
-        socketServers.forEach(client -> {
-            if (uid.equals(client.getUid())) {
-                try {
-                    client.getSession().getBasicRemote().sendText(JSON.toJSONString(map));
-                    log.info("服务端推送给客户端 :【{}】", client.getUid(), message);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
     /**
      * 获取服务端当前客户端的连接数量，
      * 因为服务端本身也作为客户端接受信息，
@@ -246,7 +175,7 @@ public class WebsocketServer {
                     }
                 });
 
-        log.info("服务端推送给所有客户端 :【{}】", message);
+        log.info("推送给所有用户 :【{}】", message);
     }
 
     /**

@@ -6,7 +6,7 @@ security:
     # 白名单
   white:
     list:
-      ips: 127.0.0.1
+      ips: 127.0.0.1,192.168.179.137
       urlPatterns: /*
       ignoreUrl: /favicon.ico
 

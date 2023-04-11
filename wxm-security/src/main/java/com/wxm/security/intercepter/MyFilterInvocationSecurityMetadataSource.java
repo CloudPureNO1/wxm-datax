@@ -54,7 +54,15 @@ import java.util.stream.Collectors;
 @Component
 public class MyFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
     private static final String SUPER_SUPER_MANAGER = "wxm";
+    /**
+     * 直接放行的url,equals
+     */
     private static final String[] PERMISSION_ALL_URLS = {"/login", "/auth/token", "/refresh/token"};
+    /**
+     * 放行的websocket地址,startWith
+     */
+    private static final String [] WEBSOCKET_URLS ={"/ws-push-socket"} ;
+
     @Autowired
     private RedisTemplate redisTemplate;
     @Autowired
@@ -159,6 +167,15 @@ public class MyFilterInvocationSecurityMetadataSource implements FilterInvocatio
                 if (Arrays.stream(PERMISSION_ALL_URLS).anyMatch(url -> url.equals(requestUrl))) {
                     return null;
                 }
+                /**
+                 * 放开 websocket 连接
+                 * websocket 连接时不应该带有任何身份信息或验证信息
+                 * 需要校验，用其他比如，登录后才能连接（可以先登录，在连接websocket之间校验，校验通过的菜进行连接的代码）
+                 */
+                if(Arrays.stream(WEBSOCKET_URLS).anyMatch(url->requestUrl.startsWith(url))){
+                    return null;
+                }
+
                 if (bLogon) {
                     log.error(">>>>>请先配置接口权限：>>>>>>>>{}", requestUrl);
                     return SecurityConfig.createList("WXM_ROLE_NEED");
