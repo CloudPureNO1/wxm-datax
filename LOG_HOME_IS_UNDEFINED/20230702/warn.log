@@ -1,0 +1,73 @@
+2023-07-02 10:33:45.575 [main] WARN  org.mybatis.spring.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.wxm.spi]' package. Please check your configuration.
+2023-07-02 10:33:49.085 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.BlobTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:33:49.134 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Calendars ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:33:49.178 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.CronTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:33:49.269 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.FiredTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:33:49.366 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.JobDetails ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:33:49.427 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Locks ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:33:49.486 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.PausedTriggerGrps ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:33:49.549 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SchedulerState ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:33:49.604 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SimpleTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:33:49.648 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SimpropTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:33:49.708 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Triggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:33:51.242 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 26f341a9-6a52-4bc1-b031-d9f15cbd7114
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-07-02 10:38:37.938 [main] WARN  org.mybatis.spring.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.wxm.spi]' package. Please check your configuration.
+2023-07-02 10:38:40.000 [main] WARN  org.mybatis.spring.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.wxm.spi]' package. Please check your configuration.
+2023-07-02 10:38:44.042 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.BlobTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.057 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.BlobTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.076 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Calendars ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.091 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Calendars ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.107 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.CronTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.118 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.CronTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.174 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.FiredTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.190 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.FiredTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.227 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.JobDetails ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.243 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.JobDetails ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.266 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Locks ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.281 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Locks ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.297 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.PausedTriggerGrps ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.310 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.PausedTriggerGrps ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.329 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SchedulerState ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.341 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SchedulerState ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.358 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SimpleTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.448 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SimpleTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.471 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SimpropTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.497 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SimpropTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.528 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Triggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.558 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Triggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:46.694 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: d9dbd7de-50a6-4858-8795-3f692fb1b15a
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-07-02 10:38:47.525 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 788e8fbf-99da-4aca-8f36-5b656e2e3c10
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-07-02 10:38:48.130 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 9702 is already in use
+2023-07-02 10:40:58.767 [main] WARN  org.mybatis.spring.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.wxm.spi]' package. Please check your configuration.
+2023-07-02 10:41:01.414 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.BlobTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:41:01.445 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Calendars ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:41:01.469 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.CronTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:41:01.522 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.FiredTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:41:01.556 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.JobDetails ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:41:01.578 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Locks ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:41:01.598 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.PausedTriggerGrps ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:41:01.624 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SchedulerState ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:41:01.652 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SimpleTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:41:01.680 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SimpropTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:41:01.721 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Triggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:41:03.182 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: e735032b-f641-4ae9-9ac0-6edd85feee79
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+

@@ -2,7 +2,8 @@ package com.wxm.push.server;
 
 import com.alibaba.fastjson.JSON;
 import com.wxm.push.dto.Client;
-import com.wxm.push.dto.MsgDto;
+import com.wxm.push.dto.MsgDtoIn;
+import com.wxm.push.dto.MsgDtoOut;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -12,6 +13,7 @@ import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.stream.Collectors;
@@ -41,7 +43,7 @@ public class WebsocketServer {
 
     /**
      * 原始超级管理员登录，可以监控所有消息
-     *  Original super administrator of the system
+     * Original super administrator of the system
      */
     private final static String SYS_ORIGINAL_USERNAME = "wxm";
 
@@ -58,29 +60,29 @@ public class WebsocketServer {
      * @version 1.0.0
      **/
     @OnOpen
-    public void open(Session session, @PathParam(value = "uid") String uid) {
+    public void open(Session session, @PathParam(value = "uid") String uid) throws IOException {
         this.session = session;
         socketServers.add(new Client(uid, session));
         log.info("客户端:【{}】连接成功", uid);
 
-        if(!CollectionUtils.isEmpty(socketServers)){
-            sendAll("用户【"+uid+"】上线");
+        if (!CollectionUtils.isEmpty(socketServers)) {
+            sendAll("用户【" + uid + "】上线");
         }
     }
 
     /**
      * 收到客户端发送信息时触发
-     * 我们将其推送给客户端(wxm)
-     * 其实也就是服务端本身，为了达到前端聊天效果才这么做的
      *
-     * @param message
+     * @param msgData
      */
     @OnMessage
-    public void onMessage(String message, @PathParam(value = "uid") String uid) {
-        Client client = socketServers.stream().filter(cli -> cli.getSession() == session).collect(Collectors.toList()).get(0);
+    public void onMessage(String msgData, @PathParam(value = "uid") String uid) throws IOException {
+        MsgDtoIn in = JSON.parseObject(msgData, MsgDtoIn.class);
         // 用于监控消息
-        sendMessage("用户【"+client.getUid()+"】发送信息：【"+message+"】", SYS_ORIGINAL_USERNAME);
-        log.info("用户:【{}】发送信息:{}", client.getUid(), message);
+        sendMessage(in.getMsg(), uid, in.getListUid());
+
+        Client client = socketServers.stream().filter(cli -> cli.getSession() == session).collect(Collectors.toList()).get(0);
+        log.info("用户:【{}】发送信息:{}", client.getUid(), msgData);
     }
 
     /**
@@ -88,16 +90,16 @@ public class WebsocketServer {
      * socketServers中客户端连接信息
      */
     @OnClose
-    public void onClose() {
-        socketServers.forEach(client -> {
+    public void onClose() throws IOException {
+        for(Client client:socketServers) {
             if (client.getSession().getId().equals(session.getId())) {
                 log.info("客户端:【{}】断开连接", client.getUid());
                 socketServers.remove(client);
-                if(!CollectionUtils.isEmpty(socketServers)){
-                    sendAll("用户["+client.getUid()+"]下线");
+                if (!CollectionUtils.isEmpty(socketServers)) {
+                    sendAll("用户[" + client.getUid() + "]下线");
                 }
             }
-        });
+        }
     }
 
     /**
@@ -110,12 +112,10 @@ public class WebsocketServer {
         socketServers.forEach(client -> {
             if (client.getSession().getId().equals(session.getId())) {
                 socketServers.remove(client);
-                log.error("客户端:【{}】发生异常", client.getUid());
-                error.printStackTrace();
+                log.error("客户端:【{}】发生异常", client.getUid(),error);
             }
         });
     }
-
 
 
     /**
@@ -130,7 +130,7 @@ public class WebsocketServer {
      *
      * @return
      */
-    public synchronized  int getOnlineNum() {
+    public synchronized int getOnlineNum() {
         return socketServers.size();
     }
 
@@ -139,7 +139,7 @@ public class WebsocketServer {
      *
      * @return
      */
-    public synchronized  List<String> getOnlineUsers() {
+    public synchronized List<String> getOnlineUsers() {
         List<String> onlineUsers = socketServers.stream()
                 .map(client -> client.getUid())
                 .collect(Collectors.toList());
@@ -148,29 +148,52 @@ public class WebsocketServer {
     }
 
 
-
-
-
     /**
      * 信息发送的方法，通过客户端的userName
      * 拿到其对应的session，调用信息推送的方法
+     *
      * @param message
-     * @param username
+     * @param uid     可以四username  消息发送者
+     * @param listUid 可以四username  消息接收者
      */
-    public synchronized  void sendMessage(String message, String username) {
+    public synchronized void sendMessage(String message, String uid, List<String> listUid) throws IOException {
+        // 超级管理员登录时，可以监听其他所有信息
+        List<Client> listSuper = socketServers.stream().filter(item ->item.getUid().equals(SYS_ORIGINAL_USERNAME) && !uid.equals(SYS_ORIGINAL_USERNAME)).collect(Collectors.toList());
+        if (!CollectionUtils.isEmpty(listSuper)) {
+            for (Client client : listSuper) {
+                String msg="【"+uid+"】给【"+client.getUid()+"】发送消息："+message;
+                if(client.getUid().equals(SYS_ORIGINAL_USERNAME)){
+                    msg=message;
+                }
+                MsgDtoOut out = new MsgDtoOut();
+                out.setType("2").setData(msg).setUid(client.getUid());
+                client.getSession().getBasicRemote().sendText(JSON.toJSONString(out));
+            }
+        }
 
-        socketServers.forEach(client -> {
-            if (username.equals(client.getUid())) {
-                try {
-                    MsgDto msgDto = new MsgDto();
-                    msgDto.setType("2").setData("给【"+client.getUid()+"】发送信息：【"+message+"】").setUid(client.getUid());
-                    client.getSession().getBasicRemote().sendText(JSON.toJSONString(msgDto));
-                    log.info("给【{}】发送消息 :【{}】", client.getUid(),JSON.toJSONString(msgDto));
-                } catch (IOException e) {
-                    e.printStackTrace();
+
+
+        if (CollectionUtils.isEmpty(listUid)) {
+            for (Client client : socketServers) {
+                if (!uid.equals(client.getUid())) {  // 不给自己发信息
+                    MsgDtoOut out = new MsgDtoOut();
+                    out.setType("2").setData(message).setUid(client.getUid());
+                    client.getSession().getBasicRemote().sendText(JSON.toJSONString(out));
+                    log.info("【{}】给【{}】发送消息 :【{}】", uid, client.getUid(), JSON.toJSONString(out));
                 }
             }
-        });
+        }
+
+        List<Client> listNormal = socketServers.stream().filter(item -> listUid.stream().anyMatch(d -> d.equals(item.getUid()))).collect(Collectors.toList());
+        for (Client client : listNormal) {
+            if (!uid.equals(client.getUid())) {  // 不给自己发信息
+                MsgDtoOut out = new MsgDtoOut();
+                out.setType("2").setData(message).setUid(client.getUid());
+                client.getSession().getBasicRemote().sendText(JSON.toJSONString(out));
+                log.info("【{}】给【{}】发送消息 :【{}】", uid, client.getUid(), JSON.toJSONString(out));
+            }
+        }
+
     }
 
 
@@ -178,70 +201,64 @@ public class WebsocketServer {
      * 信息发送的方法，通过客户端的userName
      * 拿到其对应的session，调用信息推送的方法
      * 可是时没有连接websocket的用户调用，uid并不一定存在
+     *
      * @param message
-     * @param username
-     * @param senderUid 发送者的uid 可以为空（标识没有连接websocket的用户发送）
+     * @param uid
+     * @param toUid
      */
-    public synchronized  void sendMessage(String message, String username,String senderUid) {
-        String us=StringUtils.hasLength(senderUid)?"["+senderUid+"】":"";
-        socketServers.forEach(client -> {
-            if (username.equals(client.getUid())) {
-                try {
-                    MsgDto msgDto = new MsgDto();
-                    msgDto.setType("2").setData(us+"给【"+client.getUid()+"】发送信息：【"+message+"】").setUid(client.getUid());
-                    client.getSession().getBasicRemote().sendText(JSON.toJSONString(msgDto));
-                    log.info("用户【{}】发送消息给【{}】 :【{}】", client.getUid(),username, JSON.toJSONString(msgDto));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+    public synchronized void sendMessage(String message, String uid, String toUid) throws IOException {
+        List<Client> list = socketServers.stream().filter(item -> item.getUid().equals(toUid)).collect(Collectors.toList());
+        if (CollectionUtils.isEmpty(list)) {
+            session.getBasicRemote().sendText("用户【" + toUid + "】不在线");
+            log.info("用户【{}】不在线", toUid);
+        }
 
+        for (Client client : list) {
+            if (session != client.getSession()) {// 不给自己发送信息
+                MsgDtoOut out = new MsgDtoOut();
+                out.setType("2").setData(message).setUid(client.getUid());
+                client.getSession().getBasicRemote().sendText(JSON.toJSONString(out));
+                log.info("用户【{}】发送消息给【{}】 :【{}】", uid, client.getUid(), JSON.toJSONString(out));
+
+            }
+        }
+    }
 
 
     /**
      * 信息群发，我们要排除服务端自己不接收到推送信息
      * 所以我们在发送的时候将服务端排除掉
+     *
      * @param message
      */
-    public synchronized void sendAll(String message) {
+    public synchronized void sendAll(String message) throws IOException {
         //群发，不发送给服务端自己
-        socketServers.stream().forEach(client -> {
-            try {
-                MsgDto msgDto = new MsgDto();
-                msgDto.setType("2").setData("给【"+client.getUid()+"】发送信息给：【"+message+"】").setUid(client.getUid());
-                client.getSession().getBasicRemote().sendText(JSON.toJSONString(msgDto));
-            } catch (IOException e) {
-//                throw new RuntimeException(e);
-                e.getMessage();
-            }
-        });
+        for (Client client : socketServers) {
+            MsgDtoOut out = new MsgDtoOut();
+            out.setType("2").setData(message).setUid(client.getUid());
+            client.getSession().getBasicRemote().sendText(JSON.toJSONString(out));
+        }
 
         log.info("推送给所有用户 :【{}】", message);
     }
 
+
     /**
      * 信息群发，我们要排除服务端自己不接收到推送信息
      * 所以我们在发送的时候将服务端排除掉
      * 可是时没有连接websocket的用户调用，uid并不一定存在
+     *
      * @param message
      * @param senderUid 发送者的uid 可以为空（标识没有连接websocket的用户发送）
      */
-    public synchronized void sendAll(String message,String senderUid) {
-        String us=StringUtils.hasLength(senderUid)?"["+senderUid+"】":"";
+    public synchronized void sendAll(String message, String senderUid) throws IOException {
         //群发，不发送给服务端自己
-        socketServers.stream().filter(item->!item.getUid().equals(senderUid)).forEach(client -> {
-            try {
-                MsgDto msgDto = new MsgDto();
-                msgDto.setType("2").setData(us+"给【"+client.getUid()+"】发送信息给：【"+message+"】").setUid(client.getUid());
-                client.getSession().getBasicRemote().sendText(JSON.toJSONString(msgDto));
-            } catch (IOException e) {
-//                throw new RuntimeException(e);
-                e.getMessage();
-            }
-        });
-
+        List<Client>list=socketServers.stream().filter(item -> !item.getUid().equals(senderUid)).collect(Collectors.toList());
+        for(Client client:list) {
+            MsgDtoOut out = new MsgDtoOut();
+            out.setType("2").setData(message).setUid(client.getUid());
+            client.getSession().getBasicRemote().sendText(JSON.toJSONString(out));
+        }
         log.info("推送给所有用户 :【{}】", message);
     }
 
@@ -249,11 +266,12 @@ public class WebsocketServer {
      * 多个人发送给指定的几个用户
      *
      * @param message
-     * @param persons
+     * @param listUid
+     * @param uid  发送者可以为空
      */
-    public synchronized  void SendMany(String message, List<String> persons) {
-        for (String userName : persons) {
-            sendMessage(message, userName);
+    public synchronized void sendMany(String message, List<String> listUid,String uid) throws IOException {
+        if(StringUtils.hasLength(uid)){
+            sendMessage(message, uid,listUid);
         }
     }
 

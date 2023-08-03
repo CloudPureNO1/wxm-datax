@@ -13,6 +13,7 @@ import com.wxm.base.exception.SecurityException;
 import com.wxm.security.wrapper.MyHttpServletRequestWrapper;
 import com.wxm.util.my.code.Base64Util;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.annotation.Order;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -34,6 +35,7 @@ import java.util.List;
  * @date 2022/8/9 13:39
  * @since 1.0.0
  */
+@Order(-97)
 @Slf4j
 public class SecurityFilter implements Filter {
     /**
@@ -298,7 +300,7 @@ public class SecurityFilter implements Filter {
                 return false;
             }
             for(String character:list){
-                str=str.replaceAll(character,"");
+                str=str.toLowerCase().replaceAll(character,"");
             }
         }
 

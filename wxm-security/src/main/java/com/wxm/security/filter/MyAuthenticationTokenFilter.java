@@ -30,7 +30,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * <p></p>
@@ -40,6 +42,7 @@ import java.util.Arrays;
  * @date 2021/4/26 14:59
  * @since 1.0.0
  */
+@Order(1)
 @Slf4j
 @Component
 public class MyAuthenticationTokenFilter extends OncePerRequestFilter {
@@ -50,7 +53,10 @@ public class MyAuthenticationTokenFilter extends OncePerRequestFilter {
     /**
      * 放行的websocket地址,startWith
      */
-    private static final String [] WEBSOCKET_URLS ={"/ws-push-socket"} ;
+//    private static final String [] WEBSOCKET_URLS ={"/ws-push-socket"} ;
+
+    @Value("${websocket.uris}")
+    private List<String> listWebsocketUri = new ArrayList<>();
     @Value("${server.servlet.context-path}")
     private String contentPath;
     @Autowired
@@ -76,7 +82,16 @@ public class MyAuthenticationTokenFilter extends OncePerRequestFilter {
          * websocket 连接时不应该带有任何身份信息或验证信息
          * 需要校验，用其他比如，登录后才能连接（可以先登录，在连接websocket之间校验，校验通过的菜进行连接的代码）
          */
-        if(Arrays.stream(WEBSOCKET_URLS).anyMatch(url->apiUrl.startsWith(url))){
+//        if(Arrays.stream(WEBSOCKET_URLS).anyMatch(url->apiUrl.startsWith(url))){
+//            filterChain.doFilter(request, response);
+//            return;
+//        }
+        /**
+         * 放开 websocket 连接
+         * websocket 连接时不应该带有任何身份信息或验证信息
+         * 需要校验，用其他比如，登录后才能连接（可以先登录，在连接websocket之间校验，校验通过的菜进行连接的代码）
+         */
+        if (listWebsocketUri.stream().anyMatch(url -> apiUrl.startsWith(url))) {
             filterChain.doFilter(request, response);
             return;
         }

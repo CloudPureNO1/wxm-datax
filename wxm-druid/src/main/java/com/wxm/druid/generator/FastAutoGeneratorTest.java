@@ -34,7 +34,7 @@ public class FastAutoGeneratorTest {
             //new DataSourceConfig.Builder("jdbc:mysql://127.0.0.1:3306/qjob?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useAffectedRows=true&zeroDateTimeBehavior=convertToNull", "qjob", "qjob");
 //            new DataSourceConfig.Builder("jdbc:mysql://127.0.0.1:3306/wxm?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useAffectedRows=true&zeroDateTimeBehavior=convertToNull", "wxm", "wxm")
 //            new DataSourceConfig.Builder("jdbc:mysql://10.20.1.69:13367/admdvsmnit?characterEncoding=UTF-8", "admdvsmnit", "admdvsmnit")
-            new DataSourceConfig.Builder("jdbc:mysql://rdsnimyju26nerqo.mysql.rds.aliyuncs.com:3306/disabled?characterEncoding=UTF-8", "disabled2", "Disabled2")
+            new DataSourceConfig.Builder("jdbc:mysql://yaohao.whjkyl.cn:16030/insiis7?useSSL=false&serverTimezone=GMT%2B8&characterEncoding=utf-8", "root", "Whdx#2023")
                     .dbQuery(new MySqlQuery())
                     //.schema("qjob")
                     .typeConvert(new MySqlTypeConvert())

@@ -7,6 +7,7 @@ import com.wxm.push.server.WebsocketServer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,14 +51,14 @@ public class WebSocketController {
      */
     @PostMapping("/sendMsg")
     @ResponseBody
-    public String sendMsg(@RequestBody String jsonStr) {
+    public String sendMsg(@RequestBody String jsonStr) throws IOException {
         //第一个参数 :msg 发送的信息内容
         //第二个参数为用户长连接传的用户人数
         JSONObject json = JSON.parseObject(jsonStr);
         String msg=json.getString("msg");
         JSONArray jsonArray=json.getJSONArray("userList");
         List<String>userList=jsonArray.toJavaList(String.class);
-        ws.SendMany(msg, userList);
+        ws.sendMany(msg, userList,null);
         return "success";
     }
 
@@ -68,7 +69,7 @@ public class WebSocketController {
      */
     @PostMapping("/sendAll")
     @ResponseBody
-    public String sendAll(@RequestParam("msg") String msg) {
+    public String sendAll(@RequestParam("msg") String msg) throws IOException {
         ws.sendAll(msg);
         return "success";
     }

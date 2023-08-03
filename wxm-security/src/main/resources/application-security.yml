@@ -1,3 +1,10 @@
+# websocket 地址放行
+# 放开 websocket 连接
+# websocket 连接时不应该带有任何身份信息或验证信息
+# 需要校验，用其他比如，登录后才能连接（可以先登录，在连接websocket之间校验，校验通过的菜进行连接的代码）
+websocket:
+  uris: /ws-push-socket
+
 security:
   cross:
     # 允许跨域的请求源地址
@@ -8,7 +15,7 @@ security:
     list:
       ips: 127.0.0.1,192.168.179.137
       urlPatterns: /*
-      ignoreUrl: /favicon.ico
+      ignoreUrl: /favicon.ico,${websocket.uris}
 
   # 防sql注入
   inject:
@@ -23,6 +30,7 @@ security:
         - { url: /favicon.ico,characters: allIgnore}
         - { url: /gateway/rbac/52001,/gateway/rbac/52001 ,characters: delete}
         - { url: /test ,characters: delete,select}
+        - { url: /gateway/rbac/42001 ,characters: table}
 
   # 防SXX攻击
   script:

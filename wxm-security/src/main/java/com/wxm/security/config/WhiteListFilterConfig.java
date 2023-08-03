@@ -4,10 +4,12 @@ package com.wxm.security.config;
 import com.wxm.security.filter.WhiteListFilter;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,12 +24,14 @@ import java.util.Map;
  * @date 2021/3/17 13:19
  * @since 1.0.0
  */
+
 @Getter
 @Setter
 @Configuration
 @ConfigurationProperties(prefix = "security.white.list",ignoreUnknownFields = false)
 public class WhiteListFilterConfig {
-
+    @Value("${server.servlet.context-path}")
+    private String contentPath;
     private String ips;
 
     private String ignoreUrl;
@@ -57,6 +61,7 @@ public class WhiteListFilterConfig {
         filterRegistrationBean.setUrlPatterns(urlPatterns);
         initParameters.put("ips",ips);
         initParameters.put("ignoreUrl",ignoreUrl);
+        initParameters.put("contentPath",contentPath);
         filterRegistrationBean.setInitParameters(initParameters);
         return filterRegistrationBean;
     }

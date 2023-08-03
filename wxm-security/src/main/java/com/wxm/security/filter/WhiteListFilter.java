@@ -5,6 +5,7 @@ import com.wxm.base.dto.DataRtn;
 import com.wxm.base.enums.SecurityInfoEnum;
 import com.wxm.util.my.IPUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.annotation.Order;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.*;
@@ -21,17 +22,21 @@ import java.util.Arrays;
  * @date 2021/3/17 13:13
  * @since 1.0.0
  */
+@Order(-99)
 @Slf4j
 
 public class WhiteListFilter implements Filter {
     private String ips;
     private String ignoreUrl;
+    private String contentPath;
+
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>WhiteListFilter init");
          ips=filterConfig.getInitParameter("ips");
          ignoreUrl=filterConfig.getInitParameter("ignoreUrl");
+        contentPath=filterConfig.getInitParameter("contentPath");
     }
 
     @Override
@@ -44,6 +49,7 @@ public class WhiteListFilter implements Filter {
         response.setHeader("Cache-Control", "no-cache");
         
         try{
+
 
             log.info("白名单：{}",ips);
             String ip= IPUtils.getIpAddr(request);
@@ -74,7 +80,7 @@ public class WhiteListFilter implements Filter {
     }
 
     public boolean passUrl(String url){
-        if(StringUtils.hasLength(ignoreUrl)&& Arrays.stream(url.split(",")).anyMatch(item->ignoreUrl.equals(item))){
+        if(StringUtils.hasLength(ignoreUrl)&& Arrays.stream(ignoreUrl.split(",")).anyMatch(item->url.startsWith(item)||url.startsWith(contentPath+item))){
             return true;
         }
         return false;

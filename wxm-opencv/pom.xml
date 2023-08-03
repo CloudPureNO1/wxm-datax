@@ -32,6 +32,16 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/resources/opencv/opencv-460.jar</systemPath>
         </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/net.sourceforge.tess4j/tess4j -->
+        <dependency>
+            <groupId>net.sourceforge.tess4j</groupId>
+            <artifactId>tess4j</artifactId>
+            <version>4.5.1</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>

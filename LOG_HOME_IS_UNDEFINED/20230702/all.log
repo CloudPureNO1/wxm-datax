@@ -1,0 +1,252 @@
+2023-07-02 10:33:43.873 [main] INFO  com.wxm.spi.WxmSpiApplication - Starting WxmSpiApplication using Java 1.8.0_361 on DESKTOP-1MGM9M0 with PID 38060 (M:\wxm-datax\wxm-spi\target\classes started by wangsm in M:\wxm-datax)
+2023-07-02 10:33:43.884 [main] INFO  com.wxm.spi.WxmSpiApplication - The following 5 profiles are active: "datax", "druid", "oss", "redis", "security"
+2023-07-02 10:33:45.365 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-02 10:33:45.369 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-02 10:33:45.398 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2023-07-02 10:33:45.575 [main] WARN  org.mybatis.spring.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.wxm.spi]' package. Please check your configuration.
+2023-07-02 10:33:45.890 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.datasource.dynamic-com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceProperties' of type [com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-07-02 10:33:45.895 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceAutoConfiguration' of type [com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceAutoConfiguration$$EnhancerBySpringCGLIB$$ac420f03] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-07-02 10:33:45.924 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'dsProcessor' of type [com.baomidou.dynamic.datasource.processor.DsHeaderProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-07-02 10:33:46.348 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9702 (http)
+2023-07-02 10:33:46.360 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-07-02 10:33:46.361 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.64]
+2023-07-02 10:33:46.542 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/wxmSpi] - Initializing Spring embedded WebApplicationContext
+2023-07-02 10:33:46.542 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2488 ms
+2023-07-02 10:33:47.699 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1,master} inited
+2023-07-02 10:33:47.729 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2,quartz} inited
+2023-07-02 10:33:47.729 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [quartz] success
+2023-07-02 10:33:47.731 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
+2023-07-02 10:33:47.731 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [2] datasource,primary datasource named [master]
+2023-07-02 10:33:49.085 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.BlobTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:33:49.134 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Calendars ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:33:49.178 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.CronTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:33:49.269 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.FiredTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:33:49.366 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.JobDetails ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:33:49.427 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Locks ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:33:49.486 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.PausedTriggerGrps ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:33:49.549 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SchedulerState ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:33:49.604 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SimpleTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:33:49.648 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SimpropTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:33:49.708 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Triggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:33:51.166 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2023-07-02 10:33:51.179 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2023-07-02 10:33:51.179 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2023-07-02 10:33:51.180 [main] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2023-07-02 10:33:51.181 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2023-07-02 10:33:51.181 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2023-07-02 10:33:51.181 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2023-07-02 10:33:51.182 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@163df259
+2023-07-02 10:33:51.242 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 26f341a9-6a52-4bc1-b031-d9f15cbd7114
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-07-02 10:33:51.411 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@37142579, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@264576e4, org.springframework.security.web.context.SecurityContextPersistenceFilter@3c8758d1, org.springframework.security.web.header.HeaderWriterFilter@5e055ce1, org.springframework.security.web.csrf.CsrfFilter@cef885d, org.springframework.security.web.authentication.logout.LogoutFilter@495e8a3, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4d0abb23, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@575d48db, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@86bf90b, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@7b7e4b20, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5da3f32a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@57b3d869, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5c13af01, org.springframework.security.web.session.SessionManagementFilter@545f0b6, org.springframework.security.web.access.ExceptionTranslationFilter@5b895e76, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4ff0706c]
+2023-07-02 10:33:51.529 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 9702 (http) with context path '/wxmSpi'
+2023-07-02 10:33:51.531 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2023-07-02 10:33:51.532 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2023-07-02 10:33:51.544 [main] INFO  com.wxm.spi.WxmSpiApplication - Started WxmSpiApplication in 9.78 seconds (JVM running for 14.377)
+2023-07-02 10:37:41.571 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2023-07-02 10:38:33.822 [main] INFO  com.wxm.spi.WxmSpiApplication - Starting WxmSpiApplication using Java 1.8.0_361 on DESKTOP-1MGM9M0 with PID 18408 (M:\wxm-datax\wxm-spi\target\classes started by wangsm in M:\wxm-datax)
+2023-07-02 10:38:33.832 [main] INFO  com.wxm.spi.WxmSpiApplication - The following 5 profiles are active: "datax", "druid", "oss", "redis", "security"
+2023-07-02 10:38:37.329 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-02 10:38:37.338 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-02 10:38:37.441 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 16 ms. Found 0 Redis repository interfaces.
+2023-07-02 10:38:37.938 [main] WARN  org.mybatis.spring.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.wxm.spi]' package. Please check your configuration.
+2023-07-02 10:38:38.033 [main] INFO  com.wxm.spi.WxmSpiApplication - Starting WxmSpiApplication using Java 1.8.0_361 on DESKTOP-1MGM9M0 with PID 1592 (M:\wxm-datax\wxm-spi\target\classes started by wangsm in M:\wxm-datax)
+2023-07-02 10:38:38.041 [main] INFO  com.wxm.spi.WxmSpiApplication - The following 5 profiles are active: "datax", "druid", "oss", "redis", "security"
+2023-07-02 10:38:38.804 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.datasource.dynamic-com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceProperties' of type [com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-07-02 10:38:38.814 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceAutoConfiguration' of type [com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceAutoConfiguration$$EnhancerBySpringCGLIB$$811d8294] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-07-02 10:38:38.874 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'dsProcessor' of type [com.baomidou.dynamic.datasource.processor.DsHeaderProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-07-02 10:38:39.700 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9702 (http)
+2023-07-02 10:38:39.700 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-02 10:38:39.706 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-02 10:38:39.731 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-07-02 10:38:39.732 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.64]
+2023-07-02 10:38:39.750 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 9 ms. Found 0 Redis repository interfaces.
+2023-07-02 10:38:40.000 [main] WARN  org.mybatis.spring.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.wxm.spi]' package. Please check your configuration.
+2023-07-02 10:38:40.033 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/wxmSpi] - Initializing Spring embedded WebApplicationContext
+2023-07-02 10:38:40.034 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 5798 ms
+2023-07-02 10:38:40.443 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.datasource.dynamic-com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceProperties' of type [com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-07-02 10:38:40.448 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceAutoConfiguration' of type [com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceAutoConfiguration$$EnhancerBySpringCGLIB$$e961b072] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-07-02 10:38:40.483 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'dsProcessor' of type [com.baomidou.dynamic.datasource.processor.DsHeaderProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-07-02 10:38:41.191 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9702 (http)
+2023-07-02 10:38:41.213 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-07-02 10:38:41.213 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.64]
+2023-07-02 10:38:41.475 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/wxmSpi] - Initializing Spring embedded WebApplicationContext
+2023-07-02 10:38:41.475 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3330 ms
+2023-07-02 10:38:42.517 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1,master} inited
+2023-07-02 10:38:42.577 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2,quartz} inited
+2023-07-02 10:38:42.578 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [quartz] success
+2023-07-02 10:38:42.582 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
+2023-07-02 10:38:42.582 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [2] datasource,primary datasource named [master]
+2023-07-02 10:38:42.678 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1,master} inited
+2023-07-02 10:38:42.736 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2,quartz} inited
+2023-07-02 10:38:42.736 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [quartz] success
+2023-07-02 10:38:42.739 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
+2023-07-02 10:38:42.739 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [2] datasource,primary datasource named [master]
+2023-07-02 10:38:44.042 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.BlobTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.057 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.BlobTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.076 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Calendars ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.091 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Calendars ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.107 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.CronTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.118 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.CronTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.174 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.FiredTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.190 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.FiredTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.227 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.JobDetails ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.243 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.JobDetails ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.266 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Locks ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.281 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Locks ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.297 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.PausedTriggerGrps ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.310 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.PausedTriggerGrps ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.329 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SchedulerState ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.341 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SchedulerState ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.358 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SimpleTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.448 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SimpleTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.471 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SimpropTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.497 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SimpropTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.528 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Triggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:44.558 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Triggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:38:46.609 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2023-07-02 10:38:46.627 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2023-07-02 10:38:46.627 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2023-07-02 10:38:46.628 [main] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2023-07-02 10:38:46.630 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2023-07-02 10:38:46.630 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2023-07-02 10:38:46.630 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2023-07-02 10:38:46.630 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@616f81b5
+2023-07-02 10:38:46.694 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: d9dbd7de-50a6-4858-8795-3f692fb1b15a
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-07-02 10:38:47.378 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2023-07-02 10:38:47.386 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4a2d66e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4dffff9, org.springframework.security.web.context.SecurityContextPersistenceFilter@3dea1ecc, org.springframework.security.web.header.HeaderWriterFilter@7612116b, org.springframework.security.web.csrf.CsrfFilter@3af39e7b, org.springframework.security.web.authentication.logout.LogoutFilter@2cf88901, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7c0b0bd9, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@40d10264, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@2904bc56, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@29bd056a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@40a7974, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@8d5da7e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7bb25046, org.springframework.security.web.session.SessionManagementFilter@562f6681, org.springframework.security.web.access.ExceptionTranslationFilter@54ca9420, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@32e65852]
+2023-07-02 10:38:47.409 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2023-07-02 10:38:47.410 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2023-07-02 10:38:47.412 [main] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2023-07-02 10:38:47.415 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2023-07-02 10:38:47.415 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2023-07-02 10:38:47.415 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2023-07-02 10:38:47.416 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@446b64b3
+2023-07-02 10:38:47.521 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 9702 (http) with context path '/wxmSpi'
+2023-07-02 10:38:47.524 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2023-07-02 10:38:47.524 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2023-07-02 10:38:47.525 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 788e8fbf-99da-4aca-8f36-5b656e2e3c10
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-07-02 10:38:47.540 [main] INFO  com.wxm.spi.WxmSpiApplication - Started WxmSpiApplication in 11.04 seconds (JVM running for 13.577)
+2023-07-02 10:38:48.011 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@46d1b59, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@61d2f267, org.springframework.security.web.context.SecurityContextPersistenceFilter@1c7f6e96, org.springframework.security.web.header.HeaderWriterFilter@6ce15112, org.springframework.security.web.csrf.CsrfFilter@50778bde, org.springframework.security.web.authentication.logout.LogoutFilter@1187dc82, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4c2ab536, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@5e385b6f, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@26d40c77, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@4586a8aa, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1ac0cdb0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1682e6a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@85ab964, org.springframework.security.web.session.SessionManagementFilter@2ba024cb, org.springframework.security.web.access.ExceptionTranslationFilter@36dafa24, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6ef037e4]
+2023-07-02 10:38:48.130 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 9702 is already in use
+2023-07-02 10:38:48.131 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+2023-07-02 10:38:48.132 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2023-07-02 10:38:48.132 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2023-07-02 10:38:48.132 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2023-07-02 10:38:48.165 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource start closing ....
+2023-07-02 10:38:48.170 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closing ...
+2023-07-02 10:38:48.256 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closed
+2023-07-02 10:38:48.257 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2023-07-02 10:38:48.257 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2023-07-02 10:38:48.257 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource all closed success,bye
+2023-07-02 10:38:48.263 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+2023-07-02 10:38:48.432 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2023-07-02 10:38:49.042 [main] ERROR o.s.b.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 9702 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 9702 or configure this application to listen on another port.
+
+2023-07-02 10:39:37.558 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2023-07-02 10:40:57.856 [main] INFO  com.wxm.spi.WxmSpiApplication - Starting WxmSpiApplication using Java 1.8.0_361 on DESKTOP-1MGM9M0 with PID 10292 (M:\wxm-datax\wxm-spi\target\classes started by wangsm in M:\wxm-datax)
+2023-07-02 10:40:57.860 [main] INFO  com.wxm.spi.WxmSpiApplication - The following 5 profiles are active: "datax", "druid", "oss", "redis", "security"
+2023-07-02 10:40:58.603 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-02 10:40:58.606 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-02 10:40:58.629 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 5 ms. Found 0 Redis repository interfaces.
+2023-07-02 10:40:58.767 [main] WARN  org.mybatis.spring.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.wxm.spi]' package. Please check your configuration.
+2023-07-02 10:40:59.036 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.datasource.dynamic-com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceProperties' of type [com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-07-02 10:40:59.041 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceAutoConfiguration' of type [com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceAutoConfiguration$$EnhancerBySpringCGLIB$$9e57ea81] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-07-02 10:40:59.064 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'dsProcessor' of type [com.baomidou.dynamic.datasource.processor.DsHeaderProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-07-02 10:40:59.452 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9702 (http)
+2023-07-02 10:40:59.465 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-07-02 10:40:59.465 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.64]
+2023-07-02 10:40:59.637 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/wxmSpi] - Initializing Spring embedded WebApplicationContext
+2023-07-02 10:40:59.638 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1734 ms
+2023-07-02 10:41:00.558 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1,master} inited
+2023-07-02 10:41:00.617 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2,quartz} inited
+2023-07-02 10:41:00.618 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [quartz] success
+2023-07-02 10:41:00.619 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
+2023-07-02 10:41:00.619 [main] INFO  c.b.dynamic.datasource.DynamicRoutingDataSource - dynamic-datasource initial loaded [2] datasource,primary datasource named [master]
+2023-07-02 10:41:01.414 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.BlobTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:41:01.445 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Calendars ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:41:01.469 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.CronTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:41:01.522 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.FiredTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:41:01.556 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.JobDetails ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:41:01.578 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Locks ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:41:01.598 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.PausedTriggerGrps ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:41:01.624 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SchedulerState ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:41:01.652 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SimpleTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:41:01.680 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.SimpropTriggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:41:01.721 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.wxm.druid.entity.quartz.Triggers ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-02 10:41:03.110 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2023-07-02 10:41:03.122 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2023-07-02 10:41:03.122 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2023-07-02 10:41:03.122 [main] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2023-07-02 10:41:03.123 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2023-07-02 10:41:03.123 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2023-07-02 10:41:03.123 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2023-07-02 10:41:03.124 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@4e61a863
+2023-07-02 10:41:03.182 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: e735032b-f641-4ae9-9ac0-6edd85feee79
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-07-02 10:41:03.338 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2125535d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@d190639, org.springframework.security.web.context.SecurityContextPersistenceFilter@44106e25, org.springframework.security.web.header.HeaderWriterFilter@2792c28, org.springframework.security.web.csrf.CsrfFilter@4bca8eaf, org.springframework.security.web.authentication.logout.LogoutFilter@4b7e4d14, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@70421a08, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@4e3ee457, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@5f82209e, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@5c7c75fb, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5649f55, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@558127d2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@515c732d, org.springframework.security.web.session.SessionManagementFilter@351e86b2, org.springframework.security.web.access.ExceptionTranslationFilter@59c862af, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@b81938d]
+2023-07-02 10:41:03.466 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 9702 (http) with context path '/wxmSpi'
+2023-07-02 10:41:03.468 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2023-07-02 10:41:03.469 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2023-07-02 10:41:03.480 [main] INFO  com.wxm.spi.WxmSpiApplication - Started WxmSpiApplication in 6.42 seconds (JVM running for 7.797)
+2023-07-02 10:41:11.877 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
