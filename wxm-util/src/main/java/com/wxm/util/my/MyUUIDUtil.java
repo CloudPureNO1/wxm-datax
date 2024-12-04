@@ -13,6 +13,9 @@ import java.util.UUID;
 public class MyUUIDUtil {
     private static final String BASE_CHARACTER = "1234567890_)(*&^%$#@!~`|\\}{][=-'\";:.,<>/?abcdefghigklmnopqrstuvwhyzABCDEFGHIGKLMNOPQRSTUVWHYZ";
 
+    public static String uuid() {
+        return UUID.randomUUID().toString();
+    }
     public static String uuid(String str) {
         String uuidStr = UUID.randomUUID().toString();
         return uuidStr+"-"+getRdStr(str);

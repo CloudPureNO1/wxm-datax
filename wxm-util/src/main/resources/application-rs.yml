@@ -1,0 +1,42 @@
+cron:
+  field_sensitization:
+    daily: 0 0 23 * * ?
+encryption:
+  class: com.wxm.util.my.code.AESUtil
+  encrypt_method: encrypt
+  decrypt_method: decrypt
+sensitive:
+- type: com.wxm.base.enums.DesensitizationEnum.NAME
+  rate: 90%
+  count: 100
+  and: EM3NKlwq2nD1f/4zH854k+S3vCPk9anl7h/pHcJk+kUK5cPqHTmsR36WI2nFkeQYRRK+jF6T+y0MVDIB+MnrXp/OISCKUL+259R/aAEp2tC7W4qW2HwX4T4ardb3ZfGa
+- type: com.wxm.base.enums.DesensitizationEnum.ID_CARD
+  rate: 90%
+  count: 100
+  and: EM3NKlwq2nD1f/4zH854k8tihjoCc7npe/GE99SFOJrXHVY8tdasl0T0BO1qtcO7rxPxprVaW8L+rvBsO95aMd3kIBdrHczi4ByJqBKJTHZjhRURF83Pla9dtFa4SZHMyawF0bH0R/ungkJ5HWfUovSQ9t+0af7FJHGK1UOEjo+9f5L0LDRNEIWptqO+PgGRe9EwLI7S18cm50qDBezQvKNn5411cPszi5fzIa3IFhg=
+- type: com.wxm.base.enums.DesensitizationEnum.MOBILE
+  rate: 90%
+  count: 100
+  and: 4r1WAq1LIuqmtfHDW9kvwqsO0XnEi9sCbAVX73n18xYvokX2VSqwCq6Opky9vofx+K5TtXVwlh7bbsjI2VbOSuMfAzk5RdK1Y9u6rJuAeks6PVSwk6zRRAOSZcig9pfD97lQnLEouCcoDu0cvaqu8Q==
+- type: com.wxm.base.enums.DesensitizationEnum.ADDRESS
+  rate: 90%
+  count: 100
+  and: 4r1WAq1LIuqmtfHDW9kvwv1TTZ8Soe6HmOpoK7VweLew6HV6HFxdMVdXaIeJ7tAGQLNXdIfM/npOPgvCeXgm+LCU3rhIBrBBWK5ozrC/FW7Ny9GKhkFcKusgJjkN4g0E/VbalAMmn+0GKMFjM5cApJ6SppB7xFqG6W93rLnzUI1QrjZAAtXIkxnWp9d2Gy9CsXIh8NAutOMgjZMY1u+38A==
+- type: com.wxm.base.enums.DesensitizationEnum.COMPANY_CARD
+  rate: 90%
+  count: 100
+  and: 4r1WAq1LIuqmtfHDW9kvwlz8hfF17bi6uoo8HikUMW6AMqITd5Kh4PIVWMFTbRgDqWg++kZd5Z7WdxXqJuzw4jo9VLCTrNFEA5JlyKD2l8NDBo/MEgwqoZfyNhxtPxPUTihLVA7JuIKXB/Z3RulE2A==
+- type: com.wxm.base.enums.DesensitizationEnum.SB
+  rate: 90%
+  count: 100
+  and: 4r1WAq1LIuqmtfHDW9kvwrCu3xvRJosbZnYOPjkXx9Lwu5fNTV7IGjP/47Kr9KJjv71KN593DyWz4ceyqkBxNlbmJe6hX73UkWwcRgnq/Zx0WGSj70OM7EFdJZAAXENhNY0ldmecbI/yjn8ifPQK5g==
+- type: com.wxm.base.enums.DesensitizationEnum.COMPANY
+  rate: 1%
+  count: 100
+  and: 4r1WAq1LIuqmtfHDW9kvwowwjf20kR50tBPdfo1x5qgZJlRTAeORkCijVyA2m+BFl5JYZ7G/Qlvoxiq1PALiUfJ9OnxJyyOET4zqa4ww2NFGXJMRQyNebNg9ajOlWEC3
+- type: com.wxm.base.enums.DesensitizationEnum.EMAIL
+  rate: 1%
+  count: 100
+  and: 4r1WAq1LIuqmtfHDW9kvwpka36g+NGG8uKrQFejs/4e+ehtXaJpkOqH7DCYa8q/WIxlqaNar1eMlfktSc4AaFXfuIpI/NGhEXbfNPbWJZF071G0qRv0wwWPysUgXPCYG
+table_meta_compare_cron: 0 0 1 * * ?
+api_agent_check_cron: 0 0 * * * ?

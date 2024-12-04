@@ -31,10 +31,11 @@ public class FastAutoGeneratorTest {
      * 数据源配置
      */
     private static final DataSourceConfig.Builder DATA_SOURCE_CONFIG =
+
             //new DataSourceConfig.Builder("jdbc:mysql://127.0.0.1:3306/qjob?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useAffectedRows=true&zeroDateTimeBehavior=convertToNull", "qjob", "qjob");
-//            new DataSourceConfig.Builder("jdbc:mysql://127.0.0.1:3306/wxm?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useAffectedRows=true&zeroDateTimeBehavior=convertToNull", "wxm", "wxm")
+            new DataSourceConfig.Builder("jdbc:mysql://106.54.34.92:8722/wxm?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useAffectedRows=true&zeroDateTimeBehavior=convertToNull", "wxm", "wxm")
 //            new DataSourceConfig.Builder("jdbc:mysql://10.20.1.69:13367/admdvsmnit?characterEncoding=UTF-8", "admdvsmnit", "admdvsmnit")
-            new DataSourceConfig.Builder("jdbc:mysql://yaohao.whjkyl.cn:16030/insiis7?useSSL=false&serverTimezone=GMT%2B8&characterEncoding=utf-8", "root", "Whdx#2023")
+//            new DataSourceConfig.Builder("jdbc:mysql://yaohao.whjkyl.cn:16040/spd?useSSL=false&serverTimezone=GMT%2B8&characterEncoding=utf-8", "root", "Whdx#2023")
                     .dbQuery(new MySqlQuery())
                     //.schema("qjob")
                     .typeConvert(new MySqlTypeConvert())
@@ -110,8 +111,12 @@ public class FastAutoGeneratorTest {
                 .strategyConfig((scanner, builder) -> builder.addInclude(getTables(scanner.apply("请输入表名，多个英文逗号分隔？所有输入 all")))
 //                        .addTablePrefix("qrtz_")
                         .controllerBuilder().enableRestStyle().enableHyphenStyle()
-                        .entityBuilder().idType(IdType.AUTO).addTableFills(new Property("updateTime", FieldFill.INSERT_UPDATE)).addTableFills(new Column("create_time", FieldFill.INSERT)).enableLombok().enableTableFieldAnnotation().disableSerialVersionUID().addTableFills(
+                        .mapperBuilder()
+                        .entityBuilder()
+                        .idType(IdType.AUTO)
+                        .addTableFills(new Property("updateTime", FieldFill.INSERT_UPDATE)).addTableFills(new Column("create_time", FieldFill.INSERT)).enableLombok().enableTableFieldAnnotation().disableSerialVersionUID().addTableFills(
                                 new Column("create_time", FieldFill.INSERT)
+
                         ).build())
                 /*
                     模板引擎配置，默认 Velocity 可选模板引擎 Beetl 或 Freemarker

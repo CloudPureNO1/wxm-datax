@@ -1,0 +1,33 @@
+# 指定 quartz 默认使用的数据库 quartz (多数据源时必须设置为主数据源)
+spring:
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: never # 初始化Quartz表结构，根据需要设置
+      ds-name: quartz # 这里指定Quartz使用的数据源名称
+
+
+
+# quartz 其他配置
+quartz:
+  properties:
+    org:
+      quartz:
+        scheduler:
+          instanceName: MyScheduler
+          dataSource: quartz
+        jobStore:
+          class: org.quartz.impl.jdbcjobstore.JobStoreTX
+          driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+          tablePrefix: QRTZ_
+          useProperties: false
+          misfireThreshold: 60000
+
+
+
+
+
+ # 测试信息
+  my:
+    ordinary:
+      message: This is my Test message!

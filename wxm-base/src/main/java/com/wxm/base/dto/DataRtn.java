@@ -28,6 +28,8 @@ public class DataRtn<T>{
         this.rsTime=System.currentTimeMillis();
     }
 
+
+
     public DataRtn success(){
         this.code="0";
         return this;
@@ -57,4 +59,31 @@ public class DataRtn<T>{
         this.detailMsg = detailMsg;
         return this;
     }
+
+
+    public static DataRtn ok(){
+        DataRtn dataRtn=new DataRtn().success();
+        return dataRtn;
+    }
+    public static DataRtn ok(String message){
+        DataRtn dataRtn=new DataRtn().success().setMessage(message);
+        return dataRtn;
+    }
+    public static <T>DataRtn<T> ok(T t){
+        DataRtn<T> dataRtn=new DataRtn<T>().success().setData(t);
+        return dataRtn;
+    }
+    public static <T>DataRtn<T> ok(T t,String message){
+        DataRtn<T> dataRtn=new DataRtn<T>().success().setData(t).setMessage(message);
+        return dataRtn;
+    }
+
+
+    public static DataRtn error(String message){
+         return new DataRtn("-2",message);
+    }
+    public static DataRtn error(String code,String message){
+         return new DataRtn(code,message);
+    }
+
 }

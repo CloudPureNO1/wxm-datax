@@ -1,7 +1,0 @@
-server:
-  port: 9702
-
-spring:
-  profiles:
-      active: druid,mybatis-plus
-

@@ -2,15 +2,11 @@ package com.wxm.base.handler;
 
 
 import com.wxm.base.dto.DataRtn;
-import com.wxm.base.enums.SecurityInfoEnum;
 import com.wxm.base.exception.*;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionException;
-import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -24,7 +20,6 @@ import javax.validation.ValidationException;
 import java.net.BindException;
 import java.sql.SQLException;
 import java.sql.SQLSyntaxErrorException;
-import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -36,7 +31,7 @@ import java.util.stream.Collectors;
  * @date 2020/12/16 11:10
  * @since 1.0.0
  */
-@Order(100)
+@Order(-100)
 @ControllerAdvice
 @Slf4j
 public class GControllerHandler {
@@ -167,11 +162,18 @@ public class GControllerHandler {
                     .setDetailMsg("【" + ((BaseException) e).getCode() + "】" + e.getMessage());
         }
         if (e instanceof SQLSyntaxErrorException || e instanceof SQLException) {
-            return new DataRtn().error().setMessage("数据库异常").setDetailMsg(e.getMessage());
+            return new DataRtn().error().setMessage("数据库异常").setDetailMsg(getFirstCause(e).getMessage());
         }
         return new DataRtn().error().setMessage(e.getMessage()).setDetailMsg(e.getMessage());
     }
 
+    public Throwable getFirstCause(Throwable e){
+        Throwable ex= (Throwable) e.getCause();
+        if(ex==null){
+            return e;
+        }
+        return getFirstCause(ex);
+    }
     @ExceptionHandler(ValidationException.class)
     @ResponseBody
     public DataRtn handle(ValidationException exception) {

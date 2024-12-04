@@ -5,11 +5,14 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.wxm.base.bean.TreeBean;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+
 
 /**
  * <p>树结构工具类</p>
@@ -147,7 +150,7 @@ public class TreeUtil {
          * 2、分组
          */
         Map<String, List<JSONObject>> map = jsonList.stream().filter(node -> !isRootNode(node.getString(parentKey), rootParentValue)).collect(Collectors.groupingBy(node -> node.getString(parentKey)));
-        if (org.springframework.util.StringUtils.hasLength(nodeTypeKey) && org.springframework.util.StringUtils.hasLength(leafTypeValue)) {
+        if (StringUtils.hasText(nodeTypeKey) && StringUtils.hasText(leafTypeValue)) {
 
             /**
              * 1、排除叶子节点
@@ -181,7 +184,7 @@ public class TreeUtil {
          * 2、分组
          */
         Map<String, List<JSONObject>> map = jsonList.stream().filter(node -> !isRootNode(node.getString(parentKey), rootParentValue)).collect(Collectors.groupingBy(node -> node.getString(parentKey)));
-        if (org.springframework.util.StringUtils.hasLength(nodeTypeKey) && org.springframework.util.StringUtils.hasLength(leafTypeValue)) {
+        if (StringUtils.hasText(nodeTypeKey) && StringUtils.hasText(leafTypeValue)) {
             /**
              * 1、排除叶子节点、按钮节点
              * 2、设置节点的子节点
@@ -203,10 +206,10 @@ public class TreeUtil {
      * @return
      */
     private static boolean isRootNode(String parentKeyValue, String rootParentValue) {
-        if (org.springframework.util.StringUtils.hasLength(rootParentValue)) {
+        if (StringUtils.hasText(rootParentValue)) {
             return rootParentValue.equals(parentKeyValue);
         }
-        return !org.springframework.util.StringUtils.hasLength(parentKeyValue) || "0".equals(parentKeyValue);
+        return !StringUtils.hasText(parentKeyValue) || "0".equals(parentKeyValue);
     }
 
     /**

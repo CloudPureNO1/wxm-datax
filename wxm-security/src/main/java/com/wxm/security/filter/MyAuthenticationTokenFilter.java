@@ -8,6 +8,7 @@ import com.wxm.security.bean.Token;
 import com.wxm.security.bean.TokenIn;
 import com.wxm.security.encoder.SM3PasswordEncoder;
 import com.wxm.security.util.TokenUtil;
+import com.wxm.util.my.MyStringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,7 +50,10 @@ public class MyAuthenticationTokenFilter extends OncePerRequestFilter {
     /**
      * 直接放行的url,equals
      */
-    private static final String[] PERMISSION_ALL_URLS = {"/login", "/auth/token", "/refresh/token"};
+//    private static final String[] PERMISSION_ALL_URLS = {"/login", "/auth/token", "/refresh/token"};
+    @Value("${permission.all.urls}")
+    private List<String> permissionAllUrls = new ArrayList<>();
+
     /**
      * 放行的websocket地址,startWith
      */
@@ -72,7 +76,7 @@ public class MyAuthenticationTokenFilter extends OncePerRequestFilter {
          */
         String apiUrl = request.getRequestURI().replaceFirst(contentPath, "");
         log.info(">>>>>>>访问地址：{}", apiUrl);
-        if (Arrays.stream(PERMISSION_ALL_URLS).anyMatch(url -> url.equals(apiUrl))) {
+        if (permissionAllUrls.stream().anyMatch(url -> url.equals(apiUrl)|| apiUrl.startsWith(MyStringUtils.removeStars(url)))) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -103,76 +107,81 @@ public class MyAuthenticationTokenFilter extends OncePerRequestFilter {
          * 没有传入token放行，交给后面的校验
          */
         if (!StringUtils.hasLength(accessToken)) {
-            log.error("【{}】{}：{}", SecurityInfoEnum.TOKEN_EMPTY.getCode(), SecurityInfoEnum.TOKEN_EMPTY.getMsg(), SecurityInfoEnum.TOKEN_EMPTY.toString());
-            DataRtn dataRtn = new DataRtn().setCode(SecurityInfoEnum.TOKEN_EMPTY.getCode()).message(SecurityInfoEnum.TOKEN_EMPTY.getMsg()).detailMsg(SecurityInfoEnum.TOKEN_EMPTY.getMsg());
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType("text/json;charset=utf-8");
-            response.setHeader("Access-Control-Allow-Origin", "*");
-            response.setHeader("Cache-Control", "no-cache");
-            response.getWriter().write(JSON.toJSONString(dataRtn));
+            setResponse(response,SecurityInfoEnum.TOKEN_EMPTY);
             return;
         }
         /**
          * Token 存储在redis中，如果redis中没有传入的token 提示token 无效
          */
         if (!redisTemplate.hasKey(accessToken)) {
-            log.error("【{}】{}：{}", SecurityInfoEnum.TOKEN_EMPTY_ERROR.getCode(), SecurityInfoEnum.TOKEN_EMPTY_ERROR.getMsg(), SecurityInfoEnum.TOKEN_EMPTY_ERROR.toString());
-            DataRtn dataRtn = new DataRtn().setCode(SecurityInfoEnum.TOKEN_EMPTY_ERROR.getCode()).message(SecurityInfoEnum.TOKEN_EMPTY_ERROR.getMsg()).detailMsg(SecurityInfoEnum.TOKEN_EMPTY_ERROR.getMsg());
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType("text/json;charset=utf-8");
-            response.setHeader("Access-Control-Allow-Origin", "*");
-            response.setHeader("Cache-Control", "no-cache");
-            response.getWriter().write(JSON.toJSONString(dataRtn));
+//            log.error("【{}】{}：{}", SecurityInfoEnum.TOKEN_EMPTY_ERROR.getCode(), SecurityInfoEnum.TOKEN_EMPTY_ERROR.getMsg(), SecurityInfoEnum.TOKEN_EMPTY_ERROR.toString());
+//            DataRtn dataRtn = new DataRtn().setCode(SecurityInfoEnum.TOKEN_EMPTY_ERROR.getCode()).message(SecurityInfoEnum.TOKEN_EMPTY_ERROR.getMsg()).detailMsg(SecurityInfoEnum.TOKEN_EMPTY_ERROR.getMsg());
+//            response.setCharacterEncoding("UTF-8");
+//            response.setContentType("text/json;charset=utf-8");
+//            response.setHeader("Access-Control-Allow-Origin", "*");
+//            response.setHeader("Cache-Control", "no-cache");
+//            response.getWriter().write(JSON.toJSONString(dataRtn));
+            setResponse(response,SecurityInfoEnum.TOKEN_EMPTY_ERROR);
             return;
         }
         if (ObjectUtils.isEmpty(redisTemplate.opsForValue().get(accessToken))) {
-            log.error("【{}】{}：{}", SecurityInfoEnum.TOKEN_EMPTY_ERROR.getCode(), SecurityInfoEnum.TOKEN_EMPTY_ERROR.getMsg(), SecurityInfoEnum.TOKEN_EMPTY_ERROR.toString());
-            redisTemplate.delete(accessToken);
-            DataRtn dataRtn = new DataRtn().setCode(SecurityInfoEnum.TOKEN_EMPTY_ERROR.getCode()).message(SecurityInfoEnum.TOKEN_EMPTY_ERROR.getMsg()).detailMsg(SecurityInfoEnum.TOKEN_EMPTY_ERROR.getMsg());
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType("text/json;charset=utf-8");
-            response.setHeader("Access-Control-Allow-Origin", "*");
-            response.setHeader("Cache-Control", "no-cache");
-            response.getWriter().write(JSON.toJSONString(dataRtn));
+//            log.error("【{}】{}：{}", SecurityInfoEnum.TOKEN_EMPTY_ERROR.getCode(), SecurityInfoEnum.TOKEN_EMPTY_ERROR.getMsg(), SecurityInfoEnum.TOKEN_EMPTY_ERROR.toString());
+//            redisTemplate.delete(accessToken);
+//            DataRtn dataRtn = new DataRtn().setCode(SecurityInfoEnum.TOKEN_EMPTY_ERROR.getCode()).message(SecurityInfoEnum.TOKEN_EMPTY_ERROR.getMsg()).detailMsg(SecurityInfoEnum.TOKEN_EMPTY_ERROR.getMsg());
+//            response.setCharacterEncoding("UTF-8");
+//            response.setContentType("text/json;charset=utf-8");
+//            response.setHeader("Access-Control-Allow-Origin", "*");
+//            response.setHeader("Cache-Control", "no-cache");
+//            response.getWriter().write(JSON.toJSONString(dataRtn));
+
+            setResponse(response,SecurityInfoEnum.TOKEN_EMPTY_ERROR);
             return;
         }
 
 
         UserDetails userDetails = (UserDetails) redisTemplate.opsForValue().get(accessToken);
         if (userDetails == null || !StringUtils.hasLength(userDetails.getUsername())) {
-            log.error("【{}】{}：{}", SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getCode(), SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getMsg(), SecurityInfoEnum.USER_LOGON_STATUS_INVALID.toString());
             redisTemplate.delete(accessToken);
-            DataRtn dataRtn = new DataRtn().setCode(SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getCode()).message(SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getMsg()).detailMsg(SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getMsg());
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType("text/json;charset=utf-8");
-            response.setHeader("Access-Control-Allow-Origin", "*");
-            response.setHeader("Cache-Control", "no-cache");
-            response.getWriter().write(JSON.toJSONString(dataRtn));
+//            log.error("【{}】{}：{}", SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getCode(), SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getMsg(), SecurityInfoEnum.USER_LOGON_STATUS_INVALID.toString());
+//            DataRtn dataRtn = new DataRtn().setCode(SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getCode()).message(SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getMsg()).detailMsg(SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getMsg());
+//            response.setCharacterEncoding("UTF-8");
+//            response.setContentType("text/json;charset=utf-8");
+//            response.setHeader("Access-Control-Allow-Origin", "*");
+//            response.setHeader("Cache-Control", "no-cache");
+//            response.getWriter().write(JSON.toJSONString(dataRtn));
+
+            setResponse(response,SecurityInfoEnum.USER_LOGON_STATUS_INVALID);
             return;
         }
 
         String userKey = TokenUtil.getUserKey(userDetails);
         if (!redisTemplate.hasKey(userKey)) {
-            log.error("【{}】{}：{}", SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getCode(), SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getMsg(), SecurityInfoEnum.USER_LOGON_STATUS_INVALID.toString());
             redisTemplate.delete(accessToken);
-            DataRtn dataRtn = new DataRtn().setCode(SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getCode()).message(SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getMsg()).detailMsg(SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getMsg());
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType("text/json;charset=utf-8");
-            response.setHeader("Access-Control-Allow-Origin", "*");
-            response.setHeader("Cache-Control", "no-cache");
-            response.getWriter().write(JSON.toJSONString(dataRtn));
+
+//            log.error("【{}】{}：{}", SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getCode(), SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getMsg(), SecurityInfoEnum.USER_LOGON_STATUS_INVALID.toString());
+//            DataRtn dataRtn = new DataRtn().setCode(SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getCode()).message(SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getMsg()).detailMsg(SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getMsg());
+//            response.setCharacterEncoding("UTF-8");
+//            response.setContentType("text/json;charset=utf-8");
+//            response.setHeader("Access-Control-Allow-Origin", "*");
+//            response.setHeader("Cache-Control", "no-cache");
+//            response.getWriter().write(JSON.toJSONString(dataRtn));
+
+            setResponse(response,SecurityInfoEnum.USER_LOGON_STATUS_INVALID);
             return;
         }
         if (ObjectUtils.isEmpty(redisTemplate.opsForValue().get(userKey))) {
-            log.error("【{}】{}：{}", SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getCode(), SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getMsg(), SecurityInfoEnum.USER_LOGON_STATUS_INVALID.toString());
             redisTemplate.delete(accessToken);
             redisTemplate.delete(userKey);
-            DataRtn dataRtn = new DataRtn().setCode(SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getCode()).message(SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getMsg()).detailMsg(SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getMsg());
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType("text/json;charset=utf-8");
-            response.setHeader("Access-Control-Allow-Origin", "*");
-            response.setHeader("Cache-Control", "no-cache");
-            response.getWriter().write(JSON.toJSONString(dataRtn));
+
+//            log.error("【{}】{}：{}", SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getCode(), SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getMsg(), SecurityInfoEnum.USER_LOGON_STATUS_INVALID.toString());
+//            DataRtn dataRtn = new DataRtn().setCode(SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getCode()).message(SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getMsg()).detailMsg(SecurityInfoEnum.USER_LOGON_STATUS_INVALID.getMsg());
+//            response.setCharacterEncoding("UTF-8");
+//            response.setContentType("text/json;charset=utf-8");
+//            response.setHeader("Access-Control-Allow-Origin", "*");
+//            response.setHeader("Cache-Control", "no-cache");
+//            response.getWriter().write(JSON.toJSONString(dataRtn));
+
+            setResponse(response,SecurityInfoEnum.USER_LOGON_STATUS_INVALID);
             return;
         }
         Token token = (Token) redisTemplate.opsForValue().get(userKey);
@@ -182,18 +191,34 @@ public class MyAuthenticationTokenFilter extends OncePerRequestFilter {
             SecurityContext securityContext = SecurityContextHolder.getContext();
             securityContext.setAuthentication(authentication);
         } else {
-            log.error("【{}】{}：{}", SecurityInfoEnum.TOKEN_INVALID.getCode(), SecurityInfoEnum.TOKEN_INVALID.getMsg(), SecurityInfoEnum.TOKEN_INVALID.toString());
             redisTemplate.delete(accessToken);
             redisTemplate.delete(userKey);
-            DataRtn dataRtn = new DataRtn().setCode(SecurityInfoEnum.TOKEN_INVALID.getCode()).message(SecurityInfoEnum.TOKEN_INVALID.getMsg()).detailMsg(SecurityInfoEnum.TOKEN_INVALID.getMsg());
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType("text/json;charset=utf-8");
-            response.setHeader("Access-Control-Allow-Origin", "*");
-            response.setHeader("Cache-Control", "no-cache");
-            response.getWriter().write(JSON.toJSONString(dataRtn));
+
+//            log.error("【{}】{}：{}", SecurityInfoEnum.TOKEN_INVALID.getCode(), SecurityInfoEnum.TOKEN_INVALID.getMsg(), SecurityInfoEnum.TOKEN_INVALID.toString());
+//            DataRtn dataRtn = new DataRtn().setCode(SecurityInfoEnum.TOKEN_INVALID.getCode()).message(SecurityInfoEnum.TOKEN_INVALID.getMsg()).detailMsg(SecurityInfoEnum.TOKEN_INVALID.getMsg());
+//            response.setCharacterEncoding("UTF-8");
+//            response.setContentType("text/json;charset=utf-8");
+//            response.setHeader("Access-Control-Allow-Origin", "*");
+//            response.setHeader("Cache-Control", "no-cache");
+//            response.getWriter().write(JSON.toJSONString(dataRtn));
+
+            setResponse(response,SecurityInfoEnum.TOKEN_INVALID);
             return;
         }
         filterChain.doFilter(request, response);
+    }
+
+    private static void setResponse(HttpServletResponse response,SecurityInfoEnum securityInfoEnum) throws IOException {
+//        log.error("【{}】{}：{}", SecurityInfoEnum.TOKEN_EMPTY.getCode(), SecurityInfoEnum.TOKEN_EMPTY.getMsg(), SecurityInfoEnum.TOKEN_EMPTY.toString());
+//        DataRtn dataRtn = new DataRtn().setCode(SecurityInfoEnum.TOKEN_EMPTY.getCode()).message(SecurityInfoEnum.TOKEN_EMPTY.getMsg()).detailMsg(SecurityInfoEnum.TOKEN_EMPTY.getMsg());
+//
+        log.error("【{}】{}：{}", securityInfoEnum.getCode(), securityInfoEnum.getMsg(), securityInfoEnum.toString());
+        DataRtn dataRtn = new DataRtn().setCode(securityInfoEnum.getCode()).message(securityInfoEnum.getMsg()).detailMsg(securityInfoEnum.getMsg());
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/json;charset=utf-8");
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Cache-Control", "no-cache");
+        response.getWriter().write(JSON.toJSONString(dataRtn));
     }
 
 }

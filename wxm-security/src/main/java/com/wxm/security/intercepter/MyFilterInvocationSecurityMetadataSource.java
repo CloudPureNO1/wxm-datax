@@ -1,24 +1,18 @@
 package com.wxm.security.intercepter;
 
 import com.alibaba.fastjson.JSON;
-import com.wxm.base.exception.DbSvcException;
-import com.wxm.druid.entity.master.WxmApi;
-import com.wxm.druid.entity.master.WxmRole;
-import com.wxm.security.bean.MockData.MyRole;
+import com.wxm.druid.entity.biz.WxmApi;
+import com.wxm.druid.entity.biz.WxmRole;
 import com.wxm.security.bean.MyUserDetails;
-import com.wxm.security.encoder.SM3PasswordEncoder;
-import com.wxm.service.db.master.IWxmApiService;
-import com.wxm.service.db.master.IWxmRoleService;
+import com.wxm.service.db.biz.IWxmApiService;
+import com.wxm.service.db.biz.IWxmRoleService;
+import com.wxm.util.my.MyStringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.stereotype.Component;
@@ -57,7 +51,9 @@ public class MyFilterInvocationSecurityMetadataSource implements FilterInvocatio
     /**
      * 直接放行的url,equals
      */
-    private static final String[] PERMISSION_ALL_URLS = {"/login", "/auth/token", "/refresh/token"};
+//    private static final String[] PERMISSION_ALL_URLS = {"/login", "/auth/token", "/refresh/token"};
+    @Value("${permission.all.urls}")
+    private List<String> permissionAllUrls = new ArrayList<>();
     /**
      * 放行的websocket地址,startWith
      */
@@ -164,7 +160,7 @@ public class MyFilterInvocationSecurityMetadataSource implements FilterInvocatio
                  * @如果本方法返回null的话，意味着当前这个请求不需要任何角色就能访问
                  * 此处做逻辑控制，如果没有匹配上的，返回一个默认具体权限，防止漏缺资源配置
                  **/
-                if (Arrays.stream(PERMISSION_ALL_URLS).anyMatch(url -> url.equals(requestUrl))) {
+                if (permissionAllUrls.stream().anyMatch(url -> url.equals(requestUrl)|| requestUrl.startsWith(MyStringUtils.removeStars(url)))) {
                     return null;
                 }
                 /**

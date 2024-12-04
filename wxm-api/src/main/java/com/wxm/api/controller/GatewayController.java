@@ -5,7 +5,10 @@ import com.wxm.api.facade.Facade;
 import com.wxm.api.service.IGatewayService;
 import com.wxm.base.constrant.CharSetConstants;
 import com.wxm.base.dto.DataRtn;
+import com.wxm.base.enums.EncryptTypeEnum;
 import com.wxm.base.exception.*;
+import com.wxm.core.annotation.ApiLog;
+import com.wxm.core.annotation.OpLog;
 import com.wxm.util.my.code.Base64Util;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +44,8 @@ public class GatewayController {
 
 
 
+    @ApiLog(encryptType =EncryptTypeEnum.BASE64 ,encryptTypeObj ={"jsonStr"})
+    @OpLog(value="${subType}:${transCode}",encryptType =EncryptTypeEnum.BASE64 ,encryptTypeObj ={"jsonStr"})
     @PostMapping(value = "/gateway/{subType}/{transCode}")
     public DataRtn gateway(@PathVariable String subType, @PathVariable String transCode, @RequestBody String jsonStr, HttpServletRequest request) throws UnsupportedEncodingException, ApiException, JobException, BizSvcException, UtilException, DbSvcException, OSSException, EncodeException, DecodeException {
         jsonStr = jsonStr.replaceAll("[\\s*\t\n\r]", "");
@@ -67,6 +72,7 @@ public class GatewayController {
 
 
 
+    @OpLog(value="新增定时任务",encryptType =EncryptTypeEnum.BASE64 ,encryptTypeObj ={"jsonStr"})
     @RequestMapping("/addJob")
     public DataRtn addJob(@NotBlank(message = "定时任务内容不能为空") @RequestBody String jsonStr) throws IOException, BaseException {
         byte[] bytes = Base64.getDecoder().decode(jsonStr);
@@ -79,6 +85,22 @@ public class GatewayController {
 
 
 
+    @ApiLog(encryptType =EncryptTypeEnum.BASE64 ,encryptTypeObj ={"name"})
+    @OpLog("测试1111:${name}-----${subType}:${transCode}")
+    @GetMapping("/log/test/{subType}/{transCode}")
+    public DataRtn test(@PathVariable String subType,@PathVariable String transCode,@RequestParam String name){
+        return DataRtn.ok();
+    }
 
+    @OpLog(value="测试1111:${jsonStr.name}-----${id}-----${jsonStr.age}",jsonStr = {"jsonStr","test"})
+    @PostMapping("/log/test/wsm/{id}")
+    public DataRtn testPost(@PathVariable String id,@RequestBody String jsonStr){
+        return DataRtn.ok();
+    }
 
+    @OpLog(value="测试1111:${jsonStr.name}-----${id}-----${jsonStr.age}",jsonStr = {"jsonStr","test"},encryptType =EncryptTypeEnum.BASE64 ,encryptTypeObj ={"jsonStr"} )
+    @PostMapping("/log/test/wxm/{id}")
+    public DataRtn testPost1(@PathVariable String id,@RequestBody String jsonStr){
+        return DataRtn.ok();
+    }
 }

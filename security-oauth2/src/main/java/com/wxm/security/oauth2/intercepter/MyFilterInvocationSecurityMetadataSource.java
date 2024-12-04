@@ -1,26 +1,17 @@
 package com.wxm.security.oauth2.intercepter;
 
 import com.alibaba.fastjson.JSON;
-import com.wxm.druid.entity.master.WxmRole;
-import com.wxm.security.oauth2.bean.MockData.MyRole;
-import com.wxm.security.oauth2.encoder.SM3PasswordEncoder;
-import com.wxm.service.db.master.IWxmRoleService;
-import com.wxm.service.db.master.impl.WxmRoleService;
+import com.wxm.druid.entity.biz.WxmRole;
+import com.wxm.service.db.biz.IWxmRoleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;

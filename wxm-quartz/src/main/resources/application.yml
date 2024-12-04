@@ -1,0 +1,7 @@
+server:
+  port: 9922
+  servlet:
+    context-path: /wxm-quartz
+spring:
+  profiles:
+    active: base,datax,druid,quartz,test

@@ -40,8 +40,8 @@ public class CrossConfig {
 
 
         /**1 允许跨域的请求地址 例如 http://localhost:8090*/
-        // configuration.addAllowedOriginPattern("*");
-        configuration.setAllowedOrigins(listOrigins);  // 采用list
+         configuration.addAllowedOriginPattern("*");
+//        configuration.setAllowedOrigins(listOrigins);  // 采用list
         /**2 允许跨域的请求头*/
         configuration.addAllowedMethod("*");
         /**3 允许跨域的请求方法*/

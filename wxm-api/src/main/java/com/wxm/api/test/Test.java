@@ -1,9 +1,17 @@
 package com.wxm.api.test;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.wxm.druid.entity.biz.WxmUser;
+import com.wxm.druid.entity.quartz.DataXDetails;
+import com.wxm.druid.mapper.biz.WxmUserMapper;
+import com.wxm.druid.mapper.quartz.DataXDetailsMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * <p></p>
@@ -13,8 +21,25 @@ import java.math.BigDecimal;
  * @date 2022/6/8 9:52
  * @since 1.0.0
  */
+@Component
 @Slf4j
 public class Test {
+
+    @Autowired
+    private WxmUserMapper wxmUserMapper;
+    @Autowired
+    private DataXDetailsMapper dataXDetailsMapper;
+
+    public String test(){
+        List<WxmUser> wxmUsers = wxmUserMapper.selectAll();
+        log.info(">>>>",wxmUsers);
+
+        List<DataXDetails> dataXDetails = dataXDetailsMapper.selectList(new QueryWrapper<>());
+        log.info(">>>>",dataXDetails);
+
+        return "";
+    }
+
     public static void main(String[] args) {
    /*     List<Quartz10001Out> listTarget=new ArrayList<>();
         List<JobDetailAndTriggerBean> listSource = new ArrayList<>();

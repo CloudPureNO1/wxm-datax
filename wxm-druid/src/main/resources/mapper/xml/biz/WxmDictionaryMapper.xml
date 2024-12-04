@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxm.druid.mapper.biz.WxmDictionaryMapper">
+    <select id="selectAll" resultType="com.wxm.druid.entity.biz.WxmDictionary">
+        select *
+        from wxm_dictionary
+    </select>
+
+    <select id="selectByCon" resultType="com.wxm.druid.entity.biz.WxmDictionary">
+        select * from wxm_dictionary
+        where 1=1
+        <if test="dictId!=null">
+            and dict_id=#{dictId,jdbcType=BIGINT}
+        </if>
+        <if test="dictStatus!=null">
+            and dict_status=#{dictStatus,jdbcType=VARCHAR}
+        </if>
+        <if test="dictLabel!=null and dictLabel.length()>0">
+            and dict_label like concat('%',#{dictLabel,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="dictType!=null and dictType.length()>0">
+            and dict_type like concat(#{dictType,jdbcType=VARCHAR},'%')
+        </if>
+        order by dict_type,order_num
+    </select>
+</mapper>

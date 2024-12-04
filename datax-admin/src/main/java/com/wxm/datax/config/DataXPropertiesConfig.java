@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 @Configuration
 @PropertySource("classpath:application-datax.yml")
 public class DataXPropertiesConfig {
+
     @Value("${sys.type}")
     private String sysType;
     @Value("${datax.home.path}")

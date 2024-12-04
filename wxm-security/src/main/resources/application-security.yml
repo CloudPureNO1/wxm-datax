@@ -1,3 +1,8 @@
+# 直接放行的url,equals
+permission:
+  all:
+    urls: /login,/auth/token,/refresh/token,/validateCode/load,/validateCode/check,/log/test/*
+
 # websocket 地址放行
 # 放开 websocket 连接
 # websocket 连接时不应该带有任何身份信息或验证信息
@@ -8,12 +13,13 @@ websocket:
 security:
   cross:
     # 允许跨域的请求源地址
-    origins: http://localhost:8080,http://127.0.0.1:8080
+#    origins: http://localhost:8080,http://127.0.0.1:8080,http://106.54.34.92,http://106.54.34.92:8080,http://10.0.4.7:80,http://10.0.4.7:8080,http://115.233.221.135,http://115.233.221.135:8080
+    origins: http://localhost:8080,http://127.0.0.1:8080,http://106.54.34.92,http://106.54.34.92:8080,http://10.0.4.7:80,http://10.0.4.7:8080,http://115.233.221.135,http://115.233.221.135:8080
 
     # 白名单
   white:
     list:
-      ips: 127.0.0.1,192.168.179.137
+      ips: 127.0.0.1,192.168.179.137,106.54.34.92,10.0.4.7,115.233.221.135
       urlPatterns: /*
       ignoreUrl: /favicon.ico,${websocket.uris}
 
@@ -41,6 +47,11 @@ security:
       needVerifyMediaTypes: application/javascript,application/json,application/xml,text/html,text/xml,text/plain
       unfriendlyApi: /test/msg2,/test/msg/{tranCode}
       base64EncodeApi: /gateway/rbac/{transCode}
+
+validate:
+  code:
+    type: 1  # 滑动验证码
+
 
 # 约定默认：
 # 1、get请求方法：@RequestParam 和 @PathVariable  =》取参数名和参数值校验

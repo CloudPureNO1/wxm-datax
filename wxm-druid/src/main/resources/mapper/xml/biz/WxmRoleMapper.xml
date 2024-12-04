@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxm.druid.mapper.biz.WxmRoleMapper">
+<select id="selectAll" resultType="com.wxm.druid.entity.biz.WxmRole">
+    select * from wxm_role
+</select>
+    <select id="selectByRoleId" resultType="com.wxm.druid.entity.biz.WxmRole">
+        select * from wxm_role r
+        where 1=1
+        <if test="roleId!=null">
+            and r.role_id=#{roleId,jdbcType=BIGINT}
+        </if>
+        <if test="roleStatus!=null and roleStatus.length()>0">
+            and r.role_status=#{roleStatus,jdbcType=VARCHAR}
+        </if>
+    </select>
+    <select id="selectByCon" resultType="com.wxm.druid.entity.biz.WxmRole">
+        select * from wxm_role r
+        where 1=1
+        <if test="roleId!=null">
+            and r.role_id=#{roleId,jdbcType=BIGINT}
+        </if>
+        <if test="roleName!=null and roleName.length()>0">
+            and r.role_name like concat(#{roleName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="roleCode!=null and roleCode.length()>0">
+            and r.role_code like concat(#{roleCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="creator!=null and creator.length()>0">
+            and r.creator like concat(#{creator,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="roleType!=null and roleType.length()>0">
+            and r.role_type=#{roleType,jdbcType=VARCHAR}
+        </if>
+        <if test="roleStatus!=null and roleStatus.length()>0">
+            and r.role_status=#{roleStatus,jdbcType=VARCHAR}
+        </if>
+        <if test="groupId!=null">
+            and exists(
+            select 1 from wxm_group_role gr where gr.role_id = r.role_id
+            and gr.group_id=#{groupId,jdbcType=BIGINT}
+            )
+        </if>
+    </select>
+    <select id="selectByConNonGroup" resultType="com.wxm.druid.entity.biz.WxmRole">
+        select * from wxm_role r
+        where 1=1
+        <if test="roleId!=null">
+            and r.role_id=#{roleId,jdbcType=BIGINT}
+        </if>
+        <if test="roleName!=null and roleName.length()>0">
+            and r.role_name like concat(#{roleName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="roleCode!=null and roleCode.length()>0">
+            and r.role_code like concat(#{roleCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="creator!=null and creator.length()>0">
+            and r.creator like concat(#{creator,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="roleType!=null and roleType.length()>0">
+            and r.role_type=#{roleType,jdbcType=VARCHAR}
+        </if>
+        <if test="roleStatus!=null and roleStatus.length()>0">
+            and r.role_status=#{roleStatus,jdbcType=VARCHAR}
+        </if>
+        <if test="groupId!=null">
+            and not exists(
+            select 1 from wxm_group_role gr where gr.role_id = r.role_id
+            and gr.group_id=#{groupId,jdbcType=BIGINT}
+            )
+        </if>
+    </select>
+</mapper>

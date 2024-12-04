@@ -27,8 +27,8 @@ public class DataXDetails {
     /**
      * 主键
      */
-    @TableId(value = "file_id", type = IdType.AUTO)
-    private Long fileId;
+    @TableId(value = "file_id", type = IdType.INPUT)
+    private String fileId;
 
     /**
      * 文件名称

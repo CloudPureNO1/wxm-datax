@@ -1,23 +1,21 @@
 package com.wxm.security.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.wxm.base.enums.UserStatusEnum;
 import com.wxm.base.exception.DbSvcException;
-import com.wxm.druid.entity.master.WxmRole;
-import com.wxm.druid.entity.master.WxmUser;
+import com.wxm.druid.entity.biz.WxmRole;
+import com.wxm.druid.entity.biz.WxmUser;
 import com.wxm.security.bean.MockData.MyUser;
 import com.wxm.security.bean.MySimpleGrantedAuthority;
-import com.wxm.service.db.master.impl.WxmRoleService;
-import com.wxm.service.db.master.impl.WxmUserService;
-import lombok.NoArgsConstructor;
+import com.wxm.service.db.biz.impl.WxmRoleService;
+import com.wxm.service.db.biz.impl.WxmUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -58,8 +56,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         MyUser user = new MyUser();
         user.setUsername(username);
         user.setPassword(userModel.getPasswd());
-        user.setEnabled(("0".equals(userModel.getUserStatus()) || "2".equals(userModel.getUserStatus())) ? false : true);
-        user.setAccountNonLocked("3".equals(userModel.getUserStatus()) ? false : true);
+        user.setEnabled((UserStatusEnum.INVALID.toString().equals(userModel.getUserStatus()) || UserStatusEnum.LOGGED_OUT.toString().equals(userModel.getUserStatus())) ? false : true);
+        user.setAccountNonLocked(UserStatusEnum.LOCKED.toString().equals(userModel.getUserStatus()) ? false : true);
         user.setAccountNonExpired(userModel.getAccountExpiredTime()==null?true:userModel.getAccountExpiredTime().getTime() >= System.currentTimeMillis());
         user.setCredentialsNonExpired(userModel.getPasswordExpiredTime()==null?true:userModel.getPasswordExpiredTime().getTime() >= System.currentTimeMillis());
         //user.setPassword(this.passwordEncoder.encode("123456"));

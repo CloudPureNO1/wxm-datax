@@ -12,7 +12,9 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>wxm-druid</name>
     <description>springboot 集成 druid 多数据源</description>
+
     <packaging>jar</packaging><!--父工程使用pom打包-->
+
     <properties>
         <project-sourceEncoding>UTF-8</project-sourceEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -62,11 +64,6 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis-plus-boot-starter.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.jasypt</groupId>
-            <artifactId>jasypt</artifactId>
-            <version>${jasypt.version}</version>
-        </dependency>
 
         <!-- 多数据源 -->
         <dependency>
@@ -74,6 +71,14 @@
             <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
             <version>${dynamic-datasource-spring-boot-starter.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt</artifactId>
+            <version>${jasypt.version}</version>
+        </dependency>
+
+
 
         <dependency>
             <groupId>my.com.github.jeffreyning</groupId>

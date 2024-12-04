@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxm.druid.mapper.biz.WxmGroupMapper">
+    <select id="selectAll" resultType="com.wxm.druid.entity.biz.WxmGroup">
+        select *
+        from wxm_group
+    </select>
+
+    <select id="selectPageByCon" resultType="com.wxm.druid.entity.biz.WxmGroup">
+        select * from wxm_group where 1=1
+        <if test="groupId!=null">
+            and group_id=#{groupId,jdbcType=BIGINT}
+        </if>
+        <if test="groupCode!=null and groupCode.length()>0">
+            and group_code like concat(#{groupCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="groupName!=null and groupName.length()>0">
+            and group_name like concat(#{groupName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="groupType!=null and groupType.length()>0">
+            and group_type=#{groupType,jdbcType=VARCHAR}
+        </if>
+        <if test="groupStatus!=null and groupStatus.length()>0">
+            and group_status=#{groupStatus,jdbcType=VARCHAR}
+        </if>
+        <if test="creator!=null and creator.length()>0">
+            and creator=#{creator,jdbcType=VARCHAR}
+        </if>
+    </select>
+</mapper>

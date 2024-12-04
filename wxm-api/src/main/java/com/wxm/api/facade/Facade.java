@@ -3,8 +3,9 @@ package com.wxm.api.facade;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.wxm.base.enums.ApiEnum;
+import com.wxm.base.enums.comm.SubTypeEnum;
 import com.wxm.base.exception.*;
-import com.wxm.util.my.StringUtils;
+import com.wxm.util.my.MyStringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -34,7 +35,8 @@ public class Facade {
     }
 
 
-    private static final String[] SUB_TYPE_ARY = {"rbac", "quartz"};
+//    private static final String[] SUB_TYPE_ARY = {"rbac", "quartz"};
+    private static final String[] SUB_TYPE_ARY = SubTypeEnum.getSubTypes();
 
     public Object gateway(String subType, String transCode, String jsonText) throws ApiException, DbSvcException, BizSvcException, UtilException, JobException, OSSException, EncodeException, DecodeException {
         if (Arrays.stream(SUB_TYPE_ARY).noneMatch(type -> type.equals(subType))) {
@@ -62,7 +64,7 @@ public class Facade {
 
         // 注册的bean的名称位："sub"+subType  里面包含serve（String,String）实现方法
         // @Component("subRbac")
-        Object obj = applicationContext.getBean("sub" + StringUtils.toUpFirstCharacter(subType));
+        Object obj = applicationContext.getBean("sub" + MyStringUtils.toUpFirstCharacter(subType));
         try {
             Method method = obj.getClass().getDeclaredMethod("serve", String.class, String.class);
             method.setAccessible(true);
@@ -111,26 +113,4 @@ public class Facade {
     }
 
 
-    /**
-     * 枚举所有的
-     */
-    @Autowired
-    private SubRbac subRbac;
-    @Autowired
-    private SubQuartz subQuartz;
-
-    public Object gatewayEnum(String subType, String transCode, String jsonText) throws ApiException, JobException, BizSvcException, UtilException, DbSvcException, OSSException, EncodeException, DecodeException {
-        switch (subType) {
-            case "Rbac":
-                subRbac.serve(transCode, jsonText);
-                break;
-            case "Quartz":
-                subQuartz.serve(transCode, jsonText);
-                break;
-            default:
-                log.error("【{}】{}，非正确地址内容为：{}", ApiEnum.API_1001.toString(), ApiEnum.API_1001.getMessage(), subType);
-                throw new ApiException(ApiEnum.API_1001.toString(), ApiEnum.API_1001.getMessage() + "，非正确地址内容为：" + subType);
-        }
-        return null;
-    }
 }

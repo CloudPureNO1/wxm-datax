@@ -3,16 +3,21 @@ spring:
   datasource:
     dynamic:
       # 设置默认主数据源为master 自定义的别名，余下面的自定义数据源名称一直
-      primary: master
+      primary: quartz
       # 设置严格模式,默认false不启动. 启动后在未匹配到指定数据源时候回抛出异常,不启动会使用默认数据源
       strict: true
       #JDBC 配置
       datasource:
         # 主数据源（自定义名称，可以任意）
-        master:
-          url: jdbc:mysql://192.168.56.101:3306/wxm?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useAffectedRows=true&zeroDateTimeBehavior=convertToNull
+        biz:
+#          url: jdbc:mysql://192.168.56.101:3306/wxm?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useAffectedRows=true&zeroDateTimeBehavior=convertToNull
+#          username: wxm
+#          password: WXM77wxy@NO1
+
+          # root 密码  WXM77wxy@NO1
+          url: jdbc:mysql://106.54.34.92:8722/wxm?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useAffectedRows=true&zeroDateTimeBehavior=convertToNull
           username: wxm
-          password: WXM77wxy@NO1
+          password: wxm
           driver-class-name: com.mysql.cj.jdbc.Driver
           type: com.alibaba.druid.pool.DruidDataSource
           # 连接池配置
@@ -33,9 +38,12 @@ spring:
 
         # 第二个数据源名称（自定义，可以任意）   quartz 的表结
         quartz:
-          url: jdbc:mysql://192.168.56.101:3306/qjob?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useAffectedRows=true&zeroDateTimeBehavior=convertToNull
+#          url: jdbc:mysql://192.168.56.101:3306/qjob?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useAffectedRows=true&zeroDateTimeBehavior=convertToNull
+#          username: qjob
+#          password: WXM77wxy@NO1
+          url: jdbc:mysql://106.54.34.92:8722/qjob?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useAffectedRows=true&zeroDateTimeBehavior=convertToNull
           username: qjob
-          password: WXM77wxy@NO1
+          password: qjob
           driver-class-name: com.mysql.cj.jdbc.Driver
           type: com.alibaba.druid.pool.DruidDataSource
           # 连接池配置
@@ -56,7 +64,11 @@ spring:
 
 
 
-
+#  quartz:
+#    job-store-type: jdbc
+#    jdbc:
+#      initialize-schema: never # 初始化Quartz表结构，根据需要设置
+#      ds-name: quartz # 这里指定Quartz使用的数据源名称
 
     #监控配置
     # WebStatFilter配置，说明请参考Druid Wiki，配置_配置WebStatFilter
@@ -126,3 +138,18 @@ mybatis-plus:
     map-underscore-to-camel-case: true  #开启驼峰命名
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # #打印 SQL 语句
 
+
+
+#quartz:
+#  properties:
+#    org:
+#      quartz:
+#        scheduler:
+#          instanceName: MyScheduler
+#          dataSource: quartz
+#        jobStore:
+#          class: org.quartz.impl.jdbcjobstore.JobStoreTX
+#          driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+#          tablePrefix: QRTZ_
+#          useProperties: false
+#          misfireThreshold: 60000

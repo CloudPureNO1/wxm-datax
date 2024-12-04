@@ -2,10 +2,9 @@ package com.wxm.api.facade;
 
 import com.alibaba.fastjson.JSON;
 import com.wxm.base.enums.ApiEnum;
-import com.wxm.base.enums.BizSvcEnum;
 import com.wxm.base.exception.*;
-import com.wxm.service.biz.IBizQuartzService;
-import com.wxm.util.my.StringUtils;
+import com.wxm.service.biz.sys.IBizQuartzService;
+import com.wxm.util.my.MyStringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <p></p>
+ * <p>定时任务</p>
  * <p></p>
  *
  * @author 王森明
@@ -38,7 +37,7 @@ public class SubQuartz {
     public <T,E> E serve(String transCode,String jsonText) throws ApiException, DbSvcException, BizSvcException, UtilException, JobException, OSSException, EncodeException, DecodeException {
         try {
             // 取得dtoIn 的class
-            Class<T>dtoClazz = (Class<T>) Class.forName(DTO_IN_PREFIX+ StringUtils.toUpFirstCharacter(transCode)+DTO_IN_SUFFIX);
+            Class<T>dtoClazz = (Class<T>) Class.forName(DTO_IN_PREFIX+ MyStringUtils.toUpFirstCharacter(transCode)+DTO_IN_SUFFIX);
             T t=JSON.parseObject(jsonText,dtoClazz);
             // 取得方法
             Method method =  bizQuartzService.getClass().getDeclaredMethod("service"+transCode,dtoClazz);

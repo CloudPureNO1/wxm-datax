@@ -23,16 +23,29 @@
         <module.version>0.0.1-SNAPSHOT</module.version>
     </properties>
     <dependencies>
+        <!--        <dependency>-->
+        <!--            <groupId>com.wxm</groupId>-->
+        <!--            <artifactId>wxm-druid</artifactId>-->
+        <!--            <version>${module.version}</version>-->
+        <!--            <scope>compile</scope>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.wxm</groupId>-->
+        <!--            <artifactId>quartz-single</artifactId>-->
+        <!--            <version>${module.version}</version>-->
+        <!--            <scope>compile</scope>-->
+        <!--        </dependency>-->
+
         <dependency>
             <groupId>com.wxm</groupId>
-            <artifactId>wxm-druid</artifactId>
+            <artifactId>wxm-quartz</artifactId>
             <version>${module.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.wxm</groupId>
-            <artifactId>quartz-single</artifactId>
-            <version>${module.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.wxm</groupId>
+                    <artifactId>wxm-druid</artifactId>
+                </exclusion>
+            </exclusions>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -42,7 +55,14 @@
             <scope>compile</scope>
         </dependency>
 
-<!--获取当前登录用户信息-->
+        <dependency>
+            <groupId>com.wxm</groupId>
+            <artifactId>wxm-druid</artifactId>
+            <version>${module.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!--获取当前登录用户信息-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>

@@ -2,10 +2,10 @@ package com.wxm.security.oauth2.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wxm.base.dto.DataRtn;
-import com.wxm.druid.entity.master.WxmUser;
+import com.wxm.druid.entity.biz.WxmUser;
 import com.wxm.security.oauth2.dto.UserInfo;
-import com.wxm.service.db.master.impl.WxmResourceService;
-import com.wxm.service.db.master.impl.WxmUserService;
+import com.wxm.service.db.biz.impl.WxmResourceService;
+import com.wxm.service.db.biz.impl.WxmUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.userdetails.User;

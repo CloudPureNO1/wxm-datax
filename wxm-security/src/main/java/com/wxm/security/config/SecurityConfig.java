@@ -147,7 +147,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //http.httpBasic() // HTTP Basic方式
         // 禁用 csrf,不热post不能用
         http.csrf().disable();
-                // 授权配置
+        // 授权配置
         http.authorizeRequests().
                 withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
                     @Override
@@ -161,7 +161,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 // 自定义token 采用token校验
                 .antMatchers("/auth/token").permitAll()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/validateCode/**").permitAll()
                 .antMatchers("/wxmApi/login").permitAll()
+                .antMatchers("/wxmApi/validateCode/**").permitAll()
                 //异常处理(权限拒绝、登录失效等)
                 .and().exceptionHandling()
                 //匿名用户访问无权限资源时的异常处理
@@ -176,7 +179,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureHandler(myAuthenticationFailureHandler)
 
 
-
                 //退出  允许所有用户
                 .and().logout().logoutUrl("/logout").permitAll()
                 //登出成功处理逻辑
@@ -189,11 +191,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // 取消session  采用token验证时，使用 使用JWT，所以不需要HttpSession
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-                /*
-        .and().sessionManagement()
-                .maximumSessions(1)//同一账号同时登录最大用户数
-                .expiredSessionStrategy(customizeSessionInformationExpiredStrategy)//会话信息过期策略会话信息过期策略(账号被挤下线)
-*/
+        // 因为采用token 过期策略和token校验，所以不需要使用session
+//                .and().sessionManagement()
+//                .maximumSessions(1)//同一账号同时登录最大用户数
+//                .expiredSessionStrategy(customizeSessionInformationExpiredStrategy);//会话信息过期策略会话信息过期策略(账号被挤下线)
 
         http.addFilterBefore(myAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);//增加到默认拦截链中
     }

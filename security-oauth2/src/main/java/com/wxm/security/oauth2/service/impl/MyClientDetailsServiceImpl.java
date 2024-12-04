@@ -1,9 +1,9 @@
 package com.wxm.security.oauth2.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.wxm.druid.entity.master.oauth2.OauthClientDetails;
+import com.wxm.druid.entity.biz.oauth2.OauthClientDetails;
 import com.wxm.security.oauth2.encoder.SM3PasswordEncoder;
-import com.wxm.service.db.master.oauth2.IOauthClientDetailsService;
+import com.wxm.service.db.biz.oauth2.IOauthClientDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.oauth2.provider.ClientDetails;

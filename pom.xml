@@ -35,16 +35,18 @@
 
     <modules>
         <module>wxm-base</module>
+        <module>wxm-core</module>
         <module>datax-admin</module>
-        <module>quartz-single</module>
+<!--        <module>quartz-single</module>-->
         <module>wxm-api</module>
-        <module>wxm-spi</module>
-        <module>wxm-dao</module>
+<!--        <module>wxm-spi</module>-->
+<!--        <module>wxm-dao</module>-->
         <module>wxm-druid</module>
+        <module>wxm-quartz</module>
         <module>wxm-service</module>
         <module>wxm-util</module>
         <module>wxm-security</module>
-        <module>security-oauth2</module>
+<!--        <module>security-oauth2</module>-->
         <module>wxm-z-test</module>
         <module>wxm-push</module>
         <module>wxm-optencv</module>

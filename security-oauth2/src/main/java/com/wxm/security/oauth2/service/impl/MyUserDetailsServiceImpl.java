@@ -2,11 +2,11 @@ package com.wxm.security.oauth2.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wxm.base.exception.DbSvcException;
-import com.wxm.druid.entity.master.WxmRole;
-import com.wxm.druid.entity.master.WxmUser;
+import com.wxm.druid.entity.biz.WxmRole;
+import com.wxm.druid.entity.biz.WxmUser;
 import com.wxm.security.oauth2.bean.MockData.MyUser;
-import com.wxm.service.db.master.impl.WxmRoleService;
-import com.wxm.service.db.master.impl.WxmUserService;
+import com.wxm.service.db.biz.impl.WxmRoleService;
+import com.wxm.service.db.biz.impl.WxmUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,7 +14,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 

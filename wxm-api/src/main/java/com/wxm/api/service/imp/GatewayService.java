@@ -9,23 +9,22 @@ import com.wxm.base.bean.JobBean;
 import com.wxm.base.exception.BaseException;
 import com.wxm.base.exception.JobException;
 import com.wxm.base.exception.UtilException;
+import com.wxm.datax.config.DataXPropertiesConfig;
 import com.wxm.druid.entity.quartz.DataXDetails;
-import com.wxm.druid.entity.quartz.Triggers;
+
+
+import com.wxm.quartz.job.DataXCronJob;
+import com.wxm.quartz.service.IQuartzService;
 import com.wxm.service.db.quartz.IDataXDetailsService;
 import com.wxm.service.db.quartz.ITriggerService;
 import com.wxm.util.my.FileUtil;
-import com.wxm.datax.config.DataXPropertiesConfig;
-import com.wxm.quartz.single.job.DataXCronJob;
-import com.wxm.quartz.single.service.IQuartzService;
 import com.wxm.util.my.MyUUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.io.IOException;
 import java.util.Date;
 import java.util.stream.Collectors;
@@ -44,7 +43,7 @@ public class GatewayService implements IGatewayService {
     @Autowired
     private   DataXPropertiesConfig dataXPropertiesConfig;
     @Autowired
-    private  IQuartzService quartzService;
+    private IQuartzService quartzService;
     @Autowired
     private IDataXDetailsService dataXDetailsService;
 
@@ -94,6 +93,7 @@ public class GatewayService implements IGatewayService {
         dataXDetails.setCreator(userDetail.getUsername());
         dataXDetails.setUpdateTime(date);
         dataXDetails.setOperator(userDetail.getUsername());
+        dataXDetails.setFileId(MyUUIDUtil.uuid());
         dataXDetailsService.save(dataXDetails);
         quartzService.addJob(DataXCronJob.class,jobBean,jobFilePath);
         return jobFilePath;

@@ -48,28 +48,29 @@ public class WhiteListFilter implements Filter {
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Cache-Control", "no-cache");
         
-        try{
-
-
-            log.info("白名单：{}",ips);
-            String ip= IPUtils.getIpAddr(request);
-            log.info("当前的请求ip:{}，请求url:{}",ip,request.getRequestURI());
-            System.out.println("当前的请求ip:{"+ip+"}，请求url:{"+request.getRequestURI()+"}");
-            if(passUrl(request.getRequestURI())){
-                log.info("忽略路径：{}",request.getRequestURI());
-                filterChain.doFilter(request, response);
-            }else if(checkWhiteIps(ip,ips)){
-                filterChain.doFilter(servletRequest,servletResponse);
-            }else{
-                log.info("【{}】{}:{}", SecurityInfoEnum.SECURITY_CHECK_NO_PASS.getCode(),SecurityInfoEnum.SECURITY_CHECK_NO_PASS.getMsg(),ip);
-                DataRtn dataRtn=new DataRtn().failure().message(SecurityInfoEnum.SECURITY_CHECK_NO_PASS.getCode()).detailMsg(SecurityInfoEnum.SECURITY_CHECK_NO_PASS.getMsg());
-                response.getWriter().write(JSON.toJSONString(dataRtn));
-            }
-        }catch (Exception e) {
-            log.error("【{}】{}：{}",SecurityInfoEnum.SECURITY_CHECK_FAILURE.getCode(),SecurityInfoEnum.SECURITY_CHECK_FAILURE.getMsg(),e.getMessage(),e);
-            DataRtn dataRtn=new DataRtn().failure().message(SecurityInfoEnum.SECURITY_CHECK_FAILURE.getCode()).detailMsg(SecurityInfoEnum.SECURITY_CHECK_FAILURE.getMsg());
-            response.getWriter().write(JSON.toJSONString(dataRtn));
-        }
+//        try{
+//
+//
+//            log.info("白名单：{}",ips);
+//            String ip= IPUtils.getIpAddr(request);
+//            log.info("当前的请求ip:{}，请求url:{}",ip,request.getRequestURI());
+//            System.out.println("当前的请求ip:{"+ip+"}，请求url:{"+request.getRequestURI()+"}");
+//            if(passUrl(request.getRequestURI())){
+//                log.info("忽略路径：{}",request.getRequestURI());
+//                filterChain.doFilter(request, response);
+//            }else if(checkWhiteIps(ip,ips)){
+//                filterChain.doFilter(servletRequest,servletResponse);
+//            }else{
+//                log.info("【{}】{}:{}", SecurityInfoEnum.SECURITY_CHECK_NO_PASS.getCode(),SecurityInfoEnum.SECURITY_CHECK_NO_PASS.getMsg(),ip);
+//                DataRtn dataRtn=new DataRtn().failure().message(SecurityInfoEnum.SECURITY_CHECK_NO_PASS.getCode()).detailMsg(SecurityInfoEnum.SECURITY_CHECK_NO_PASS.getMsg());
+//                response.getWriter().write(JSON.toJSONString(dataRtn));
+//            }
+//        }catch (Exception e) {
+//            log.error("【{}】{}：{}",SecurityInfoEnum.SECURITY_CHECK_FAILURE.getCode(),SecurityInfoEnum.SECURITY_CHECK_FAILURE.getMsg(),e.getMessage(),e);
+//            DataRtn dataRtn=new DataRtn().failure().message(SecurityInfoEnum.SECURITY_CHECK_FAILURE.getCode()).detailMsg(SecurityInfoEnum.SECURITY_CHECK_FAILURE.getMsg());
+//            response.getWriter().write(JSON.toJSONString(dataRtn));
+//        }
+        filterChain.doFilter(servletRequest,servletResponse);
     }
 
     @Override

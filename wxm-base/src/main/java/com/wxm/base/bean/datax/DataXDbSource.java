@@ -1,6 +1,7 @@
 package com.wxm.base.bean.datax;
 
 import lombok.Data;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
@@ -60,13 +61,22 @@ public class DataXDbSource implements java.io.Serializable {
         if (StringUtils.hasLength(splitPk)) {
             parameter.put("splitPk", splitPk.trim());
         }
-        parameter.put("column", buildColumns());
+        List<String>listCols= buildColumns();
+        if(!CollectionUtils.isEmpty(listCols)){
+            parameter.put("column", listCols);
+        }
+
         List<Map<String, Object>> connection = new ArrayList<>();
         Map<String, Object> connectionItem = new HashMap<>();
         if (StringUtils.hasLength(jdbcUrl)) {
             connectionItem.put("jdbcUrl", new String[]{jdbcUrl.trim()});
         }
-        connectionItem.put("table", buildTables());
+        List<String>listTables=buildTables();
+        if(!CollectionUtils.isEmpty(listTables)){
+            connectionItem.put("table", buildTables());
+        }
+
+
         connection.add(connectionItem);
         parameter.put("connection", connection);
 

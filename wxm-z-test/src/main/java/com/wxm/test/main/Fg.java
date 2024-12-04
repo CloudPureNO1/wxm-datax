@@ -4,7 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * TODO
@@ -55,6 +57,8 @@ public class Fg {
 
 
        log.info(">>>>>>>>>>>>>>>{}",(1L << 41) / (1000L * 60 * 60 * 24 * 365));
+
+
     }
 
     public static int binaryToDecimal(String binary) {

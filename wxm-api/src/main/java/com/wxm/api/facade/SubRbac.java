@@ -3,8 +3,8 @@ package com.wxm.api.facade;
 import com.alibaba.fastjson.JSON;
 import com.wxm.base.enums.ApiEnum;
 import com.wxm.base.exception.*;
-import com.wxm.service.biz.IBizRbacService;
-import com.wxm.util.my.StringUtils;
+import com.wxm.service.biz.sys.IBizRbacService;
+import com.wxm.util.my.MyStringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <p></p>
+ * <p>权限管理系统</p>
  * <p></p>
  *
  * @author 王森明
@@ -37,7 +37,7 @@ public class SubRbac {
     public <T,E> E serve(String transCode,String jsonText) throws ApiException, DbSvcException, BizSvcException, UtilException, JobException, OSSException, EncodeException, DecodeException {
         try {
             // 取得dtoIn 的class
-            Class<T>dtoClazz = (Class<T>) Class.forName(DTO_IN_PREFIX+ StringUtils.toUpFirstCharacter(transCode)+DTO_IN_SUFFIX);
+            Class<T>dtoClazz = (Class<T>) Class.forName(DTO_IN_PREFIX+ MyStringUtils.toUpFirstCharacter(transCode)+DTO_IN_SUFFIX);
             T t= JSON.parseObject(jsonText,dtoClazz);
             // 取得方法
             Method method =  rbacService.getClass().getDeclaredMethod("service"+transCode,dtoClazz);

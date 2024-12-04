@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -153,6 +154,10 @@ public class GlobalControllerAdvice {
                 return new DataRtn().error().setMessage("不是正确的base64字符").setDetailMsg(msg);
             }
         }
+        log.error(re.getMessage(), re);
+        if (re instanceof DataIntegrityViolationException) {
+            return new DataRtn().error().setMessage("数据库异常").setDetailMsg(getFirstCause(re).getMessage());
+        }
 
         // AccessDeniedException   不能使用 re instanceof AccessDeniedException
         // MyAccessDeniedHandler 没有生效
@@ -180,8 +185,8 @@ public class GlobalControllerAdvice {
             return getDataRtn((BaseException) e);
         }
         log.error(e.getMessage(), e);
-        if (e instanceof SQLSyntaxErrorException || e instanceof SQLException) {
-            return new DataRtn().error().setMessage("数据库异常").setDetailMsg(e.getMessage());
+        if (e instanceof SQLSyntaxErrorException || e instanceof SQLException|| e instanceof DataIntegrityViolationException) {
+            return new DataRtn().error().setMessage("数据库异常").setDetailMsg(getFirstCause(e).getMessage());
         }
         if (e instanceof MissingServletRequestParameterException) {
             String paramName = ((MissingServletRequestParameterException) e).getParameterName();
@@ -191,6 +196,16 @@ public class GlobalControllerAdvice {
 
         return new DataRtn().error().setMessage(e.getMessage()).setDetailMsg(e.getMessage());
     }
+
+
+    public Throwable getFirstCause(Throwable e){
+        Throwable ex= (Throwable) e.getCause();
+        if(ex==null){
+            return e;
+        }
+        return getFirstCause(ex);
+    }
+
 
     @ExceptionHandler(Throwable.class)
     @ResponseBody
@@ -202,8 +217,8 @@ public class GlobalControllerAdvice {
                     .setMessage("请不要在代码中直接使用BaseException")
                     .setDetailMsg("【" + ((BaseException) e).getCode() + "】" + e.getMessage());
         }
-        if (e instanceof SQLSyntaxErrorException || e instanceof SQLException) {
-            return new DataRtn().error().setMessage("数据库异常").setDetailMsg(e.getMessage());
+        if (e instanceof SQLSyntaxErrorException || e instanceof SQLException|| e instanceof DataIntegrityViolationException) {
+            return new DataRtn().error().setMessage("数据库异常").setDetailMsg(getFirstCause(e).getMessage());
         }
         log.error(e.getMessage(), e);
         return new DataRtn().error().setMessage(e.getMessage()).setDetailMsg(e.getMessage());

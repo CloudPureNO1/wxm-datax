@@ -24,11 +24,17 @@
     <dependencies>
 
         <!--包含了wxm-base-->
+<!--        <dependency>-->
+<!--            <groupId>com.wxm</groupId>-->
+<!--            <artifactId>quartz-single</artifactId>-->
+<!--            <version>0.0.1-SNAPSHOT</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.wxm</groupId>
-            <artifactId>quartz-single</artifactId>
+            <artifactId>wxm-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
         <dependency>
             <groupId>com.wxm</groupId>
             <artifactId>wxm-service</artifactId>
@@ -68,10 +74,10 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-quartz -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-quartz</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-quartz</artifactId>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -89,6 +95,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!--打包时包含本地引入的jar-->
+                    <includeSystemScope>true</includeSystemScope>
+<!--                    <skip>true</skip>-->
+                </configuration>
             </plugin>
         </plugins>
     </build>

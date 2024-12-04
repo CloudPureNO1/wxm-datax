@@ -24,6 +24,6 @@ public class BigDecimalStrategy implements Strategy<BigDecimal> {
 
     @Override
     public String transToString(BigDecimal value) {
-        return value.toString();
+        return value.toPlainString();
     }
 }

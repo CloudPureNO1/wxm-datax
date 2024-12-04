@@ -1,0 +1,77 @@
+# ===================元数据脱敏定时任务开始========================
+
+# -------------------定时设置----------------------------------
+cron:
+  field_sensitization:
+    daily: "0 0 23 * * ?"
+    # minute: "0 * * * * ?"
+
+# -------------------敏感信息加密类和方法------------------------
+# 整个文件中的  sql 加密可以采用 com.wxm.util.my.code.EncryptPropertiesUtil 进行加密
+# 在application-rs.properties 中编写好明文后，执行上面的类中main方法，自动备份和加密  rs.config.meta.sensitive.list[i].and
+# 或者使用(默认加密) com.wxm.util.my.code.AESUtil 手动加密
+
+encryption:
+  class: com.wxm.util.my.code.AESUtil
+  encrypt_method: encrypt
+  decrypt_method: decrypt
+
+# -------------------姓名脱敏---设置----------------------------
+sensitive:
+  - type: com.wxm.base.enums.DesensitizationEnum.NAME
+    rate: 90%
+    count: 100
+    and: "(COLUMN_NAME like '%AAC003%' or COLUMN_NAME like 'NAME%') or (COLUMN_COMMENT like '%姓名%')"
+
+  # -------------------身份证号脱敏---设置---------------------------
+  - type: com.wxm.base.enums.DesensitizationEnum.ID_CARD
+    rate: 90%
+    count: 100
+    and: "(COLUMN_NAME like 'AAC002%' or COLUMN_NAME like 'AAE135%' or COLUMN_NAME like '%ID_CARD%' or COLUMN_NAME like 'CITIZEN_ID%') or (COLUMN_COMMENT like '%身份证%')"
+
+  # -------------------手机号脱敏---设置----------------------------
+  - type: com.wxm.base.enums.DesensitizationEnum.MOBILE
+    rate: 90%
+    count: 100
+    and: "(COLUMN_NAME in ('MOB','MOBILE','CONER_MOB','AAE008','AAC107','MOB_PHON')) or (COLUMN_COMMENT like '%手机%')"
+
+  # -------------------地址脱敏---设置----------------------------
+  - type: com.wxm.base.enums.DesensitizationEnum.ADDRESS
+    rate: 90%
+    count: 100
+    and: "(COLUMN_NAME in ('AAB211','AAF016','AAC046','AAC010','AAC046','BDC100','AAC010') or COLUMN_NAME like '%ADDR%') or (COLUMN_COMMENT like '%地址%')"
+
+  # -------------------统一社会信用代码脱敏---设置----------------------------
+  - type: com.wxm.base.enums.DesensitizationEnum.COMPANY_CARD
+    rate: 90%
+    count: 100
+    and: "(COLUMN_NAME in ('USCC','DCLA_ENTP_USCC','NO1','AAB010'))  or (COLUMN_COMMENT like '%信用代码%')"
+
+  # -------------------社保账号脱敏---设置----------------------------
+  - type: com.wxm.base.enums.DesensitizationEnum.SB
+    rate: 90%
+    count: 100
+    and: "(COLUMN_NAME in ('PATN_SSCNO','SI_BIZ_SYS_CODE','SI_OPT_ORG_CODE')) or (COLUMN_COMMENT like '%社保%')"
+
+  # -------------------公司名称脱敏---设置----------------------------
+  - type: com.wxm.base.enums.DesensitizationEnum.COMPANY
+    rate: 1%
+    count: 100
+    and: "(COLUMN_NAME in ('CO_NAME','COMPANY','AAB004')) or (COLUMN_COMMENT like '%公司名称%')"
+
+  # -------------------邮箱脱敏---设置----------------------------
+  - type: com.wxm.base.enums.DesensitizationEnum.EMAIL
+    rate: 1%
+    count: 100
+    and: "(COLUMN_NAME in ('AAE015') or COLUMN_NAME like '%EMAIL') or (COLUMN_COMMENT like '%邮箱%')"
+
+# ===================元数据脱敏定时任务结束========================
+
+# 元数据一致性比对定时任务
+table_meta_compare_cron: "0 0 1 * * ?"
+
+# 数据共享三方接口连通性监测定时任务
+api_agent_check_cron: "0 0 * * * ?"
+
+# 表数据量检查
+# table_data_count_cron: "0 0 5 * * ?"
